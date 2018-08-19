@@ -6,7 +6,7 @@ import (
 
 	"github.com/qbeon/webwire-messenger/server/apisrv"
 	"github.com/qbeon/webwire-messenger/server/apisrv/config"
-	"github.com/qbeon/webwire-messenger/server/apisrv/engine/memeng"
+	"github.com/qbeon/webwire-messenger/server/apisrv/modules/engine/memeng"
 )
 
 var addr = flag.String(

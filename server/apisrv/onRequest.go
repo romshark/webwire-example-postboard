@@ -5,8 +5,9 @@ import (
 	"time"
 
 	wwr "github.com/qbeon/webwire-go"
-	engiface "github.com/qbeon/webwire-messenger/server/apisrv/engine"
+	"github.com/qbeon/webwire-messenger/server/apisrv/api"
 	"github.com/qbeon/webwire-messenger/server/apisrv/metrics"
+	"github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
 )
 
 // OnRequest implements the wwr.ServerImplementation interface
@@ -25,13 +26,13 @@ func (srv *apiServer) OnRequest(
 	metrics.Request()
 
 	// Extract session information
-	var sessionInfo *engiface.SessionInfo
+	var sessionInfo *sessinfo.SessionInfo
 	s := connection.Session()
 	if s != nil {
-		sessionInfo = s.Info.(*engiface.SessionInfo)
+		sessionInfo = s.Info.(*sessinfo.SessionInfo)
 	} else {
-		sessionInfo = &engiface.SessionInfo{
-			UserType: engiface.UtGuest,
+		sessionInfo = &sessinfo.SessionInfo{
+			UserType: api.UtGuest,
 		}
 	}
 

@@ -8,13 +8,15 @@ import (
 
 	"github.com/pkg/errors"
 	wwr "github.com/qbeon/webwire-go"
-	"github.com/qbeon/webwire-messenger/server/apisrv/authorizer"
 	"github.com/qbeon/webwire-messenger/server/apisrv/config"
 	"github.com/qbeon/webwire-messenger/server/apisrv/dam"
-	engiface "github.com/qbeon/webwire-messenger/server/apisrv/engine"
-	"github.com/qbeon/webwire-messenger/server/apisrv/logger"
-	"github.com/qbeon/webwire-messenger/server/apisrv/resolver"
-	"github.com/qbeon/webwire-messenger/server/apisrv/validator"
+	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
+	"github.com/qbeon/webwire-messenger/server/apisrv/modules/authorizer"
+	"github.com/qbeon/webwire-messenger/server/apisrv/modules/logger"
+	"github.com/qbeon/webwire-messenger/server/apisrv/modules/passhash"
+	"github.com/qbeon/webwire-messenger/server/apisrv/modules/resolver"
+	"github.com/qbeon/webwire-messenger/server/apisrv/modules/validator"
+	"github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
 )
 
 // NewApiServer initializes a new API server instance
@@ -50,6 +52,8 @@ func NewApiServer(
 			validator,
 			// Initialize an authorizer module instance
 			authorizer.New(),
+			// Initialize a password hasher module instance
+			passhash.NewBcryptPasswordHasher(),
 			engine,
 		),
 		log:    logger,
@@ -67,7 +71,7 @@ func NewApiServer(
 			SessionManager: newApiServer,
 
 			// Define the session info parser
-			SessionInfoParser: engiface.ParseSessionInfo,
+			SessionInfoParser: sessinfo.ParseSessionInfo,
 			Heartbeat:         wwr.Enabled,
 
 			// Use the log writers provided by the logger instance
