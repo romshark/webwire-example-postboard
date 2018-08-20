@@ -10,8 +10,8 @@ import (
 	wwr "github.com/qbeon/webwire-go"
 	"github.com/qbeon/webwire-messenger/server/apisrv/config"
 	"github.com/qbeon/webwire-messenger/server/apisrv/dam"
-	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/authorizer"
+	"github.com/qbeon/webwire-messenger/server/apisrv/modules/engine/memeng"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/logger"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/passhash"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/resolver"
@@ -20,10 +20,7 @@ import (
 )
 
 // NewApiServer initializes a new API server instance
-func NewApiServer(
-	conf config.Config,
-	engine engiface.Engine,
-) (ApiServer, error) {
+func NewApiServer(conf config.Config) (ApiServer, error) {
 	// Initialize a logger module instance
 	logger, err := logger.New(&conf)
 	if err != nil {
@@ -33,31 +30,50 @@ func NewApiServer(
 	// Initialize a validator module instance
 	validator := validator.NewValidator(
 		// TODO: add UTF8 support
+		regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_-]{1,31}$"), // username rule
+		// TODO: add UTF8 support
 		regexp.MustCompile("^[a-zA-Z]{1,64}$"), // name rule
 		1,   // minimum message length
 		255, // maximum message length
 		1,   // minimum reaction description length
 		256, // maximum reaction description length
 		10,  // maximum messages query limit
+		6,   // minimum password length
+		256, // maximum password length
+	)
+
+	// Initialize the password hasher module instance
+	passwordHasher := passhash.NewBcryptPasswordHasher()
+
+	// Initialize the engine that will be powering this API server
+	inMemoryEngine, err := memeng.New(
+		passwordHasher,
+		"root", // default root administrator password
+		1024,   // preallocated sessions
+		1024,   // preallocated messages
+	)
+	if err != nil {
+		return nil, errors.Wrap(err, "engine initialization failed")
+	}
+
+	// Initialize a resolver module instance
+	resolver := resolver.New(
+		logger,
+		validator,
+		// Initialize an authorizer module instance
+		authorizer.New(),
+		passwordHasher,
+		inMemoryEngine,
 	)
 
 	// Initialize a new API server instance
 	newApiServer := &apiServer{
-		conf: conf,
-		lock: &sync.RWMutex{},
-		stop: dam.New(1),
-		// Initialize a resolver module instance
-		resolver: resolver.New(
-			logger,
-			validator,
-			// Initialize an authorizer module instance
-			authorizer.New(),
-			// Initialize a password hasher module instance
-			passhash.NewBcryptPasswordHasher(),
-			engine,
-		),
-		log:    logger,
-		engine: engine,
+		conf:     conf,
+		lock:     &sync.RWMutex{},
+		stop:     dam.New(1),
+		resolver: resolver,
+		log:      logger,
+		engine:   inMemoryEngine,
 	}
 
 	// Initialize a webwire server instance

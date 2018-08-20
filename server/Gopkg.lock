@@ -30,8 +30,10 @@
   name = "github.com/qbeon/webwire-go"
   packages = [
     ".",
+    "client",
     "message",
-    "payload"
+    "payload",
+    "requestManager"
   ]
   revision = "708d65e7024213a26a920b98caaee3ef0f268c3b"
 
@@ -57,7 +59,7 @@
     "bcrypt",
     "blowfish"
   ]
-  revision = "aabede6cba87e37f413b3e60ebfc214f8eeca1b0"
+  revision = "614d502a4dac94afa3a6ce146bd1736da82514c6"
 
 [[projects]]
   branch = "master"
@@ -74,6 +76,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "fc50ed0d8a3ce2d889944f6c4f8414431a11ea8eca0858f8690619f81772d0b1"
+  inputs-digest = "d7eec6d114f6fa3a2214372d77730e107497fbfd5a4462e57528366b9df8ac24"
   solver-name = "gps-cdcl"
   solver-version = 1

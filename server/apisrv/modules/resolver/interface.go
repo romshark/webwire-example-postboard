@@ -21,13 +21,19 @@ type Resolver interface {
 		session *sessinfo.SessionInfo,
 		connection wwr.Connection,
 		params *api.LoginParams,
-	) (wwr.Payload, error)
+	) (interface{}, error)
 
 	// Logout signs the client out making him a guest
 	Logout(
 		session *sessinfo.SessionInfo,
 		connection wwr.Connection,
-	) (wwr.Payload, error)
+	) (interface{}, error)
+
+	// CreateUser creates a new user account
+	CreateUser(
+		session *sessinfo.SessionInfo,
+		params *api.CreateUserParams,
+	) (interface{}, error)
 
 	// GetMessages looks for n messages (n = limit) after
 	// the message identified by the given identifier.
@@ -35,32 +41,32 @@ type Resolver interface {
 	GetMessages(
 		session *sessinfo.SessionInfo,
 		params *api.GetMessagesParams,
-	) (wwr.Payload, error)
+	) (interface{}, error)
 
 	// PostMessage posts a new message.
 	// Requires
 	PostMessage(
 		session *sessinfo.SessionInfo,
 		params *api.PostMessageParams,
-	) (wwr.Payload, error)
+	) (interface{}, error)
 
 	// EditMessage permanently changes the contents of a message.
 	// Requires message owner permissions
 	EditMessage(
 		session *sessinfo.SessionInfo,
 		params *api.EditMessageParams,
-	) (wwr.Payload, error)
+	) (interface{}, error)
 
 	// RemoveMessage permanently removes a messages.
 	// Requires either message owner or administrator permissions
 	RemoveMessage(
 		session *sessinfo.SessionInfo,
 		params *api.RemoveMessageParams,
-	) (wwr.Payload, error)
+	) (interface{}, error)
 
 	// PostMessageReaction adds a reaction to the message
 	PostMessageReaction(
 		session *sessinfo.SessionInfo,
 		params *api.PostMessageReactionParams,
-	) (wwr.Payload, error)
+	) (interface{}, error)
 }

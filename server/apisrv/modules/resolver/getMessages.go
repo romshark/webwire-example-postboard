@@ -1,9 +1,6 @@
 package resolver
 
 import (
-	"encoding/json"
-
-	wwr "github.com/qbeon/webwire-go"
 	"github.com/qbeon/webwire-messenger/server/apisrv/api"
 	"github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
 )
@@ -12,7 +9,7 @@ import (
 func (rsv *resolver) GetMessages(
 	session *sessinfo.SessionInfo,
 	params *api.GetMessagesParams,
-) (wwr.Payload, error) {
+) (interface{}, error) {
 	// Validate query limit
 	if err := rsv.validator.MessagesQueryLimit(params.Limit); err != nil {
 		return nil, err
@@ -27,11 +24,8 @@ func (rsv *resolver) GetMessages(
 		return nil, err
 	}
 
-	// Marshal the resulting slice of messages into JSON
-	res, err := json.Marshal(result)
-	if err != nil {
-		return nil, rsv.logInternalError(err)
-	}
-
-	return wwr.NewPayload(wwr.EncodingUtf8, res), nil
+	// Messages successfully retrieved
+	return api.GetMessagesReturn{
+		Messages: result,
+	}, nil
 }

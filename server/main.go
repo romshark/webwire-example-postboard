@@ -6,7 +6,6 @@ import (
 
 	"github.com/qbeon/webwire-messenger/server/apisrv"
 	"github.com/qbeon/webwire-messenger/server/apisrv/config"
-	"github.com/qbeon/webwire-messenger/server/apisrv/modules/engine/memeng"
 )
 
 var addr = flag.String(
@@ -27,20 +26,11 @@ func main() {
 	// NOTE: load server configuration and do everything you need
 	// before the server is initialized and launched
 
-	// Initialize the API engine that will powering this server
-	inMemoryEngine := memeng.New(
-		1024, // preallocated sessions
-		1024, // preallocated messages
-	)
-
 	// Create a new API server instance
-	srv, err := apisrv.NewApiServer(
-		config.Config{
-			ServerAddress:        *addr,
-			MetricsServerAddress: *metricsAddr,
-		},
-		inMemoryEngine,
-	)
+	srv, err := apisrv.NewApiServer(config.Config{
+		ServerAddress:        *addr,
+		MetricsServerAddress: *metricsAddr,
+	})
 	if err != nil {
 		log.Fatalf("server initialization failed: %s", err)
 	}

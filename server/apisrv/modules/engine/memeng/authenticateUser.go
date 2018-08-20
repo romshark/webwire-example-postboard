@@ -18,9 +18,7 @@ func (eng *engine) findUserByUsername(
 }
 
 // AuthenticateUser implements the Engine interface
-func (eng *engine) AuthenticateUser(
-	username string,
-) (
+func (eng *engine) AuthenticateUser(username string) (
 	*api.User,
 	string,
 	error,

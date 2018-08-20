@@ -13,6 +13,10 @@ const (
 	// ErrInternal indicates that an internal error occurred
 	ErrInternal
 
+	// ErrInvalidRequest indicates that the received request is invalid
+	// and cannot be processed
+	ErrInvalidRequest
+
 	// ErrUnauthorized indicates that the client is not authorized
 	// to execute any given operation
 	ErrUnauthorized
@@ -20,6 +24,10 @@ const (
 	// ErrWrongCredentials indicates that the provided login credentials
 	// are incorrect
 	ErrWrongCredentials
+
+	// ErrUsernameReserved indicates that a username is already reserved
+	// by another user's account
+	ErrUsernameReserved
 
 	// ErrMessageNotFound indicates that the targeted message doesn't exist
 	ErrMessageNotFound
@@ -37,10 +45,14 @@ func (errc ErrorCode) String() string {
 	switch errc {
 	case ErrInternal:
 		return "INTERNAL_ERR"
+	case ErrInvalidRequest:
+		return "INVALID_REQ"
 	case ErrUnauthorized:
 		return "UNAUTHORIZED"
 	case ErrWrongCredentials:
 		return "WRONG_CREDENTIALS"
+	case ErrUsernameReserved:
+		return "USERNAME_RESERVED"
 	case ErrMessageNotFound:
 		return "MSG_NOT_FOUND"
 	case ErrMessageAlreadyExists:

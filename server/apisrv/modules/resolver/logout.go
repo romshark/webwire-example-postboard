@@ -10,7 +10,7 @@ import (
 func (rsv *resolver) Logout(
 	session *sessinfo.SessionInfo,
 	connection wwr.Connection,
-) (wwr.Payload, error) {
+) (interface{}, error) {
 	// Ensure the user is not already an unauthenticated guest,
 	// which is easily done by checking the current session's user type
 	if session.UserType == api.UtGuest {

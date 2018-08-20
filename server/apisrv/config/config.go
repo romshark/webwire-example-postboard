@@ -2,13 +2,16 @@ package config
 
 // LogConfig defines the logging configuration
 type LogConfig struct {
+	// DebugEnabled toggles the debug log, which is disabled when false
+	DebugEnabled bool `json:"debug"`
+
 	// ErrorLogFilePath specifies the error log file path.
 	// If it's empty then the log is redirected to std.err
-	ErrorLogFilePath string `json:"error"`
+	ErrorLogFilePath string `json:"error-out"`
 
 	// DebugLogFilePath specifies the error log file path.
 	// If it's empty then the log is redirected to std.out
-	DebugLogFilePath string `json:"debug"`
+	DebugLogFilePath string `json:"debug-out"`
 }
 
 // TLSConfig defines the TLS configuration

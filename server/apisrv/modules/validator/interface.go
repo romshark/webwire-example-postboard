@@ -2,9 +2,17 @@ package validator
 
 // Validator defines the interface of the validator module
 type Validator interface {
+	// Username returns an error if the given username is invalid,
+	// otherwise returns nil
+	Username(username string) error
+
 	// Name returns an error if the given firstName / lastName is invalid,
 	// otherwise returns nil
 	Name(name string) error
+
+	// Password returns an error if the given password is invalid,
+	// otherwise returns nil
+	Password(password string) error
 
 	// MessageContents returns an error if the given message contents
 	// are invalid, otherwise returns nil

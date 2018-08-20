@@ -14,7 +14,7 @@ func (rsv *resolver) Login(
 	session *sessinfo.SessionInfo,
 	connection wwr.Connection,
 	params *api.LoginParams,
-) (wwr.Payload, error) {
+) (interface{}, error) {
 	// Verify the user isn't already logged in,
 	// which is easily done by checking the current session's user type
 	if session.UserType != api.UtGuest {
@@ -48,5 +48,6 @@ func (rsv *resolver) Login(
 		return nil, rsv.logInternalError(err)
 	}
 
+	// Successfully logged in
 	return nil, nil
 }

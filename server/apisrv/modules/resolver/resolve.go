@@ -1,10 +1,14 @@
 package resolver
 
 import (
+	"encoding/json"
 	"fmt"
 
+	"github.com/pkg/errors"
 	wwr "github.com/qbeon/webwire-go"
 	"github.com/qbeon/webwire-messenger/server/apisrv/api"
+	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
+	"github.com/qbeon/webwire-messenger/server/apisrv/modules/validator"
 	"github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
 )
 
@@ -14,67 +18,103 @@ func (rsv *resolver) Resolve(
 	sessionInfo *sessinfo.SessionInfo,
 	message wwr.Message,
 ) (wwr.Payload, error) {
-	switch message.Name() {
-	case "login":
+	var result interface{}
+	var err error
+
+	switch api.Method(message.Name()) {
+	case api.Login:
 		// Handle login request
-		var params *api.LoginParams
-		if err := parseParameters(message.Payload(), params); err != nil {
+		params := &api.LoginParams{}
+		if err := parseParameters(message, params); err != nil {
 			return nil, err
 		}
-		return rsv.Login(sessionInfo, connection, params)
+		result, err = rsv.Login(sessionInfo, connection, params)
 
-	case "logout":
+	case api.Logout:
 		// Handle logout request
-		return rsv.Logout(sessionInfo, connection)
+		result, err = rsv.Logout(sessionInfo, connection)
 
-	case "getMessages":
+	case api.GetMessages:
 		// Handle messages request
-		var params *api.GetMessagesParams
-		if err := parseParameters(message.Payload(), params); err != nil {
+		params := &api.GetMessagesParams{}
+		if err := parseParameters(message, params); err != nil {
 			return nil, err
 		}
-		return rsv.GetMessages(sessionInfo, params)
+		result, err = rsv.GetMessages(sessionInfo, params)
 
-	case "postMessage":
+	case api.PostMessage:
 		// Handle message creation request
-		var params *api.PostMessageParams
-		if err := parseParameters(message.Payload(), params); err != nil {
+		params := &api.PostMessageParams{}
+		if err := parseParameters(message, params); err != nil {
 			return nil, err
 		}
-		return rsv.PostMessage(sessionInfo, params)
+		result, err = rsv.PostMessage(sessionInfo, params)
 
-	case "editMessage":
+	case api.EditMessage:
 		// Handle message edit request
-		var params *api.EditMessageParams
-		if err := parseParameters(message.Payload(), params); err != nil {
+		params := &api.EditMessageParams{}
+		if err := parseParameters(message, params); err != nil {
 			return nil, err
 		}
-		return rsv.EditMessage(sessionInfo, params)
+		result, err = rsv.EditMessage(sessionInfo, params)
 
-	case "removeMessage":
+	case api.RemoveMessage:
 		// Handle message deletion request
-		var params *api.RemoveMessageParams
-		if err := parseParameters(message.Payload(), params); err != nil {
+		params := &api.RemoveMessageParams{}
+		if err := parseParameters(message, params); err != nil {
 			return nil, err
 		}
-		return rsv.RemoveMessage(sessionInfo, params)
+		result, err = rsv.RemoveMessage(sessionInfo, params)
 
-	case "postMessageReaction":
+	case api.PostMessageReaction:
 		// Handle message reaction creation request
-		var params *api.PostMessageReactionParams
-		if err := parseParameters(message.Payload(), params); err != nil {
+		params := &api.PostMessageReactionParams{}
+		if err := parseParameters(message, params); err != nil {
 			return nil, err
 		}
-		return rsv.PostMessageReaction(sessionInfo, params)
+		result, err = rsv.PostMessageReaction(sessionInfo, params)
+
+	case api.CreateUser:
+		// Handle user creation request
+		params := &api.CreateUserParams{}
+		if err := parseParameters(message, params); err != nil {
+			return nil, err
+		}
+		result, err = rsv.CreateUser(sessionInfo, params)
 
 	default:
 		// Fail requests asking for an invalid API action with a typed error
 		return nil, wwr.ReqErr{
-			Code: "UNSUPPORTED_REQ_TYPE",
+			Code: engiface.ErrInvalidRequest.String(),
 			Message: fmt.Sprintf(
 				"Unsupported request type: '%s'",
 				message.Name(),
 			),
 		}
 	}
+
+	if err != nil {
+		// Use generic invalid-parameter error code for validator errors
+		if validator.IsValidatorError(err) {
+			err = wwr.ReqErr{
+				Code:    engiface.ErrInvalidRequest.String(),
+				Message: err.Error(),
+			}
+		}
+		return nil, err
+	}
+
+	if result == nil {
+		return nil, nil
+	}
+
+	// Marshall result
+	replyData, err := json.Marshal(result)
+	if err != nil {
+		return nil, rsv.logInternalError(
+			errors.Wrap(err, "marshalling failed"),
+		)
+	}
+
+	return wwr.NewPayload(wwr.EncodingUtf8, replyData), nil
 }

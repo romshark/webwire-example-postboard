@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"io/ioutil"
 	"log"
 	"os"
 
@@ -56,20 +57,30 @@ func New(conf *config.Config) (Logger, error) {
 	}
 
 	// Initialize loggers
+	errorLogger := log.New(
+		errorLogWriter,
+		"ERROR: ",
+		log.Ldate|log.Ltime|log.Lshortfile,
+	)
+	debugLogger := log.New(
+		debugLogWriter,
+		"DEBUG: ",
+		log.Ldate|log.Ltime|log.Lshortfile,
+	)
+
+	// Disable debug log if explicitly disabled by the configuration
+	if conf.Log != nil && !conf.Log.DebugEnabled {
+		debugLogger.SetFlags(0)
+		debugLogger.SetOutput(ioutil.Discard)
+	}
+
+	// Initialize loggers
 	return &logger{
 		errorLogWriter: errorLogWriter,
 		debugLogWriter: debugLogWriter,
 		errorLogFile:   errorLogFile,
 		debugLogFile:   debugLogFile,
-		errorLogger: log.New(
-			errorLogWriter,
-			"ERROR: ",
-			log.Ldate|log.Ltime|log.Lshortfile,
-		),
-		debugLogger: log.New(
-			debugLogWriter,
-			"DEBUG: ",
-			log.Ldate|log.Ltime|log.Lshortfile,
-		),
+		errorLogger:    errorLogger,
+		debugLogger:    debugLogger,
 	}, nil
 }

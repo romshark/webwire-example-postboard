@@ -25,6 +25,10 @@ type Engine interface {
 		err error,
 	)
 
+	// CreateUser permanently saves the new account.
+	// Returns an error if the identifier or username are already reserved
+	CreateUser(newAccount *api.User, passwordHash string) error
+
 	// GetMessages retrieves the messages identified by the given 'identifiers'
 	// in the same order
 	GetMessages(

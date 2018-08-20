@@ -3,8 +3,8 @@ package resolver
 import (
 	"errors"
 
-	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/authorizer"
+	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/logger"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/passhash"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/validator"

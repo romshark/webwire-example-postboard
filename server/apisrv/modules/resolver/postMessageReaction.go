@@ -1,7 +1,6 @@
 package resolver
 
 import (
-	wwr "github.com/qbeon/webwire-go"
 	"github.com/qbeon/webwire-messenger/server/apisrv/api"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/authorizer"
 	"github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
@@ -11,7 +10,7 @@ import (
 func (rsv *resolver) PostMessageReaction(
 	session *sessinfo.SessionInfo,
 	params *api.PostMessageReactionParams,
-) (wwr.Payload, error) {
+) (interface{}, error) {
 	// Check authorization, message reactions can only be added by
 	// authenticated users (regular users and administrators)
 	if err := rsv.authorizer.MeetsAll(
@@ -48,11 +47,13 @@ func (rsv *resolver) PostMessageReaction(
 		return nil, err
 	}
 
+	newIdent := api.NewIdentifier()
+
 	// Instruct the engine to add the new message reaction
 	err = rsv.engine.PostMessageReaction(
 		params.MessageIdent,
 		&api.MessageReaction{
-			Ident:       api.NewIdentifier(),
+			Ident:       newIdent,
 			Author:      params.AuthorIdent,
 			Type:        params.Type,
 			Description: params.Description,
@@ -62,6 +63,7 @@ func (rsv *resolver) PostMessageReaction(
 		return nil, err
 	}
 
-	// Message reaction successfully posted
-	return nil, nil
+	return api.PostMessageReactionReturn{
+		MessageReactionIdent: newIdent,
+	}, nil
 }

@@ -1,7 +1,6 @@
 package resolver
 
 import (
-	wwr "github.com/qbeon/webwire-go"
 	"github.com/qbeon/webwire-messenger/server/apisrv/api"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/authorizer"
 	"github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
@@ -11,7 +10,7 @@ import (
 func (rsv *resolver) RemoveMessage(
 	session *sessinfo.SessionInfo,
 	params *api.RemoveMessageParams,
-) (wwr.Payload, error) {
+) (interface{}, error) {
 	// Check authorization, ensure the user is not a guest,
 	// because guests are allowed to read only
 	if err := rsv.authorizer.MeetsAll(

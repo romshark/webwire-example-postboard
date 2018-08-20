@@ -3,7 +3,6 @@ package resolver
 import (
 	"time"
 
-	wwr "github.com/qbeon/webwire-go"
 	"github.com/qbeon/webwire-messenger/server/apisrv/api"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/authorizer"
 	"github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
@@ -13,7 +12,7 @@ import (
 func (rsv *resolver) EditMessage(
 	session *sessinfo.SessionInfo,
 	params *api.EditMessageParams,
-) (wwr.Payload, error) {
+) (interface{}, error) {
 	// Validate new contents before proceeding
 	if err := rsv.validator.MessageContents(params.NewContents); err != nil {
 		return nil, err
