@@ -24,7 +24,6 @@ before_script:
   - go get github.com/go-playground/overalls
 
 script:
-  - pushd server/test
   # Run all the tests with the race detector enabled
   - overalls -project=github.com/qbeon/webwire-messenger -covermode=atomic -debug -- -race -v -coverpkg=./...
   - $HOME/gopath/bin/goveralls -coverprofile=overalls.coverprofile -service=travis-ci -repotoken $COVERALLS_TOKEN
