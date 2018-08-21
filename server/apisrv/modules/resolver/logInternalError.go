@@ -5,7 +5,7 @@ import (
 )
 
 // logInternalError logs an internal error to the error log
-// and returns just a shallow error indicating that an internal error happend.
+// and returns just a shallow error indicating that an internal error happened.
 // This prevents internal errors from leaking through the API
 // causing security issues
 func (rsv *resolver) logInternalError(err error) error {
