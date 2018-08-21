@@ -2,6 +2,7 @@ package apisrv
 
 import "net"
 
+// ApiServer defines the API server interface
 type ApiServer interface {
 	// Launch initializes and launches the server
 	Launch() error
