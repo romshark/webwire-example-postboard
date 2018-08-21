@@ -11,14 +11,12 @@ func (rsv *resolver) GetUser(
 	session *sessinfo.SessionInfo,
 	params *api.GetUserParams,
 ) (interface{}, error) {
-	// Check authorization, ensure the user is either an administrator
-	// or the owner of the profile
+	// Check authorization
 	if err := rsv.authorizer.MeetsEitherOf(
 		session,
-		authorizer.IsAdmin{},
-		authorizer.IsResourceOwner{
-			ResourceOwner: params.Ident,
-		},
+		authorizer.IsAuthenticated(
+			"only authenticated clients are allowed to retrieve a user profile",
+		),
 	); err != nil {
 		return nil, err
 	}

@@ -1,6 +1,8 @@
 package resolver
 
 import (
+	"time"
+
 	"github.com/qbeon/webwire-messenger/server/apisrv/api"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/authorizer"
 	"github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
@@ -11,11 +13,12 @@ func (rsv *resolver) PostMessageReaction(
 	session *sessinfo.SessionInfo,
 	params *api.PostMessageReactionParams,
 ) (interface{}, error) {
-	// Check authorization, message reactions can only be added by
-	// authenticated users (regular users and administrators)
 	if err := rsv.authorizer.MeetsAll(
 		session,
-		authorizer.IsAuthenticated{},
+		authorizer.IsAuthenticated(
+			"only administrators and authenticated users are allowed "+
+				"to post message reactions",
+		),
 	); err != nil {
 		return nil, err
 	}
@@ -33,9 +36,10 @@ func (rsv *resolver) PostMessageReaction(
 	// message because users are not allowed to react on their on messages
 	if err := rsv.authorizer.MeetsAll(
 		session,
-		authorizer.IsNotResourceOwner{
-			ResourceOwner: retrieved[0].Author,
-		},
+		authorizer.IsNotResourceOwner(
+			retrieved[0].Author,
+			"users are not allowed to post reactions on their own messages",
+		),
 	); err != nil {
 		return nil, err
 	}
@@ -54,9 +58,10 @@ func (rsv *resolver) PostMessageReaction(
 		params.MessageIdent,
 		&api.MessageReaction{
 			Ident:       newIdent,
-			Author:      params.AuthorIdent,
+			Author:      session.UserIdentifier,
 			Type:        params.Type,
 			Description: params.Description,
+			Creation:    time.Now().UTC(),
 		},
 	)
 	if err := rsv.handleError(err); err != nil {

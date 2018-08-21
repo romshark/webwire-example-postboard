@@ -28,6 +28,7 @@ func (h *Helper) CreateUser(
 		},
 	)
 	require.NoError(h.t, err)
+	require.False(h.t, newUserIdent.IsNull())
 
 	// Log in to the newly created account
 	user := h.ts.NewUserClient(params.Username, params.Password)

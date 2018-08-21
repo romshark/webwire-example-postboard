@@ -7,6 +7,7 @@ import (
 	"github.com/pkg/errors"
 	wwr "github.com/qbeon/webwire-go"
 	"github.com/qbeon/webwire-messenger/server/apisrv/api"
+	"github.com/qbeon/webwire-messenger/server/apisrv/modules/authorizer"
 	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
 	"github.com/qbeon/webwire-messenger/server/apisrv/modules/validator"
 	"github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
@@ -109,9 +110,16 @@ func (rsv *resolver) Resolve(
 		}
 	}
 
+	// Handle error if any
 	if err != nil {
-		// Use generic invalid-parameter error code for validator errors
-		if validator.IsValidatorError(err) {
+		if authorizer.IsAuthorizationError(err) {
+			// Use unauthorized error code for authorization errors
+			err = wwr.ReqErr{
+				Code:    engiface.ErrUnauthorized.String(),
+				Message: err.Error(),
+			}
+		} else if validator.IsValidatorError(err) {
+			// Use generic invalid-parameter error code for validator errors
 			err = wwr.ReqErr{
 				Code:    engiface.ErrInvalidRequest.String(),
 				Message: err.Error(),
@@ -120,6 +128,7 @@ func (rsv *resolver) Resolve(
 		return nil, err
 	}
 
+	// If no results are returned then marshalling can be skipped
 	if result == nil {
 		return nil, nil
 	}

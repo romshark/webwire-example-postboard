@@ -13,11 +13,12 @@ func (rsv *resolver) PostMessage(
 	session *sessinfo.SessionInfo,
 	params *api.PostMessageParams,
 ) (interface{}, error) {
-	// Check authorization, ensure the user is authenticated,
-	// because guests are allowed to read only
+	// Check authorization
 	if err := rsv.authorizer.MeetsAll(
 		session,
-		authorizer.IsAuthenticated{},
+		authorizer.IsAuthenticated(
+			"only authenticated clients are allows to post messages",
+		),
 	); err != nil {
 		return nil, err
 	}

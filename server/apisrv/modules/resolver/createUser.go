@@ -14,11 +14,12 @@ func (rsv *resolver) CreateUser(
 	session *sessinfo.SessionInfo,
 	params *api.CreateUserParams,
 ) (interface{}, error) {
-	// Check authorization, ensure the user is an administrator
-	// because only administrators can create new user accounts
+	// Check authorization
 	if err := rsv.authorizer.MeetsAll(
 		session,
-		authorizer.IsAdmin{},
+		authorizer.IsAdmin(
+			"only administrators are allowed to create new user accounts",
+		),
 	); err != nil {
 		return nil, err
 	}

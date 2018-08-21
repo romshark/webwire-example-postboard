@@ -18,11 +18,10 @@ func (rsv *resolver) EditMessage(
 		return nil, err
 	}
 
-	// Check authorization, ensure the user is not a guest,
-	// because guests are allowed to read only
+	// Check authorization
 	if err := rsv.authorizer.MeetsAll(
 		session,
-		authorizer.IsAuthenticated{},
+		authorizer.IsAuthenticated("guest clients are allows to read only"),
 	); err != nil {
 		return nil, err
 	}
@@ -36,13 +35,13 @@ func (rsv *resolver) EditMessage(
 		return nil, err
 	}
 
-	// Check authorization, ensure the user is the owner of this message
-	// because only the author of a message can edit it
+	// Check authorization
 	if err := rsv.authorizer.MeetsAll(
 		session,
-		authorizer.IsResourceOwner{
-			ResourceOwner: retrieved[0].Author,
-		},
+		authorizer.IsResourceOwner(
+			retrieved[0].Author,
+			"only authors can edit their message",
+		),
 	); err != nil {
 		return nil, err
 	}

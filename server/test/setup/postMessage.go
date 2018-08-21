@@ -19,6 +19,7 @@ func (h *Helper) PostMessage(
 	// Post message
 	msgIdent, err := author.PostMessage(context.Background(), params)
 	require.NoError(h.t, err)
+	require.False(h.t, msgIdent.IsNull())
 
 	// Retrieve message
 	message, err := author.GetMessage(context.Background(), api.GetMessageParams{

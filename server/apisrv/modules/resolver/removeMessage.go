@@ -15,7 +15,9 @@ func (rsv *resolver) RemoveMessage(
 	// because guests are allowed to read only
 	if err := rsv.authorizer.MeetsAll(
 		session,
-		authorizer.IsAuthenticated{},
+		authorizer.IsAuthenticated(
+			"only authenticated clients are allowed to remove messages",
+		),
 	); err != nil {
 		return nil, err
 	}
@@ -34,10 +36,15 @@ func (rsv *resolver) RemoveMessage(
 	// messages
 	if err := rsv.authorizer.MeetsEitherOf(
 		session,
-		authorizer.IsAdmin{},
-		authorizer.IsResourceOwner{
-			ResourceOwner: retrieved[0].Author,
-		},
+		authorizer.IsAdmin(
+			"only administrators and the author the message "+
+				"are allowed to remove a message",
+		),
+		authorizer.IsResourceOwner(
+			retrieved[0].Author,
+			"only administrators and the author the message "+
+				"are allowed to remove a message",
+		),
 	); err != nil {
 		return nil, err
 	}

@@ -58,7 +58,6 @@ type RemoveMessageParams struct {
 // required by the message reaction creation mutation
 type PostMessageReactionParams struct {
 	MessageIdent Identifier          `json:"messageId"`
-	AuthorIdent  Identifier          `json:"authorId"`
 	Type         MessageReactionType `json:"type"`
 	Description  string              `json:"description"`
 }
