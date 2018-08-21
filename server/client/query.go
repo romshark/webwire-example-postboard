@@ -37,7 +37,7 @@ func (c *apiClient) Query(
 	}
 
 	if result != nil {
-		if err := json.Unmarshal(reply.Data(), &result); err != nil {
+		if err := json.Unmarshal(reply.Data(), result); err != nil {
 			return errors.Wrap(err, "unmarshalling failed")
 		}
 	}

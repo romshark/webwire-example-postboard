@@ -1,4 +1,4 @@
-package helper
+package setup
 
 import (
 	"testing"
@@ -8,18 +8,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// Helper represents a test helper
+// Helper represents a test helper helping perform routine testing tasks
 type Helper struct {
 	t         *testing.T
+	ts        *TestSetup
 	apiServer apisrv.ApiServer
-}
-
-// Initialize initializes the helper singleton
-func New(t *testing.T, apiServer apisrv.ApiServer) *Helper {
-	return &Helper{
-		t,
-		apiServer,
-	}
 }
 
 // Time returns a time.Time object parsed from the given RFC3339 string

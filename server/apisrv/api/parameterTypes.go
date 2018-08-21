@@ -8,7 +8,7 @@ type LoginParams struct {
 }
 
 // CreateUserParams defines the parameters
-// requires by the CreateUser mutation
+// required by the CreateUser mutation
 type CreateUserParams struct {
 	FirstName string   `json:"firstName"`
 	LastName  string   `json:"lastName"`
@@ -17,8 +17,19 @@ type CreateUserParams struct {
 	Type      UserType `json:"type"`
 }
 
+// GetUserParams defines the parameters required by the user getter method
+type GetUserParams struct {
+	Ident Identifier `json:"id"`
+}
+
+// GetMessageParams defines the parameters
+// required by the messages getter method
+type GetMessageParams struct {
+	Ident Identifier `json:"id"`
+}
+
 // GetMessagesParams defines the parameters
-// required by the message reaction creation mutation
+// required by the messages getter method
 type GetMessagesParams struct {
 	After *Identifier `json:"after"`
 	Limit uint32      `json:"limit"`

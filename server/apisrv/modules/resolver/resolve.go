@@ -34,6 +34,14 @@ func (rsv *resolver) Resolve(
 		// Handle logout request
 		result, err = rsv.Logout(sessionInfo, connection)
 
+	case api.GetMessage:
+		// Handle message request
+		params := &api.GetMessageParams{}
+		if err := parseParameters(message, params); err != nil {
+			return nil, err
+		}
+		result, err = rsv.GetMessage(sessionInfo, params)
+
 	case api.GetMessages:
 		// Handle messages request
 		params := &api.GetMessagesParams{}
@@ -81,6 +89,14 @@ func (rsv *resolver) Resolve(
 			return nil, err
 		}
 		result, err = rsv.CreateUser(sessionInfo, params)
+
+	case api.GetUser:
+		// Handle user profile request
+		params := &api.GetUserParams{}
+		if err := parseParameters(message, params); err != nil {
+			return nil, err
+		}
+		result, err = rsv.GetUser(sessionInfo, params)
 
 	default:
 		// Fail requests asking for an invalid API action with a typed error

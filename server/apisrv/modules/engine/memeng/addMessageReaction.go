@@ -24,7 +24,7 @@ func (eng *engine) postMessageReaction(
 	}
 
 	// Set the reaction
-	message.Message.Reactions[reaction.Author] = reaction
+	message.Message.Reactions = append(message.Message.Reactions, *reaction)
 
 	return nil
 }

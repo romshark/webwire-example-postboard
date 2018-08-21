@@ -22,6 +22,18 @@ type Api interface {
 		params CreateUserParams,
 	) (Identifier, error)
 
+	// GetUser finds and returns the user associated with the given identifier
+	GetUser(
+		ctx context.Context,
+		params GetUserParams,
+	) (*User, error)
+
+	// GetMessage finds a specific message by the given identifier
+	GetMessage(
+		ctx context.Context,
+		params GetMessageParams,
+	) (*Message, error)
+
 	// GetMessages looks for n messages (n = 'limit') after
 	// the message identified by the given identifier.
 	// After is set to the latest message if not explicitly specified

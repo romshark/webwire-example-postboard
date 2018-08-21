@@ -33,14 +33,13 @@ func (eng *engine) GetMessagesAfter(
 
 	// Traverse the history backwards starting at the selected message
 	// until either the limit or the front-end of the slice is reached
-	for i := startIndex; i > 0 && limit > 0; i++ {
+	for i := startIndex; i >= 0 && limit > 0; i, limit = i-1, limit-1 {
 		message := eng.messages[i]
 		// Skip archived messages
 		if !message.Archived {
 			result = append(result, &message.Message)
-			limit--
 		}
 	}
 
-	return nil, nil
+	return result, nil
 }

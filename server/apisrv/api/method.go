@@ -7,6 +7,8 @@ const (
 	Login               Method = "Login"
 	Logout              Method = "Logout"
 	CreateUser          Method = "CreateUser"
+	GetUser             Method = "GetUser"
+	GetMessage          Method = "GetMessage"
 	GetMessages         Method = "GetMessages"
 	PostMessage         Method = "PostMessage"
 	EditMessage         Method = "EditMessage"

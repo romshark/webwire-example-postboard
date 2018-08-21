@@ -7,7 +7,6 @@ import (
 	"github.com/qbeon/webwire-messenger/server/apisrv"
 	"github.com/qbeon/webwire-messenger/server/apisrv/config"
 	"github.com/qbeon/webwire-messenger/server/client"
-	"github.com/qbeon/webwire-messenger/server/test/setup/helper"
 )
 
 // TestSetup represents the prepared setup of an individual test
@@ -17,7 +16,7 @@ type TestSetup struct {
 	clients []client.ApiClient
 
 	ApiServer apisrv.ApiServer
-	Helper    *helper.Helper
+	Helper    *Helper
 }
 
 // newTestSetup creates a new test setup
@@ -40,10 +39,13 @@ func newTestSetup(
 		stats:     statsRec,
 		clients:   make([]client.ApiClient, 0, 3),
 		ApiServer: apiServer,
-		Helper: helper.New(
-			t,
-			apiServer,
-		),
+	}
+
+	// Initialize test helper
+	testSetup.Helper = &Helper{
+		t:         t,
+		ts:        testSetup,
+		apiServer: apiServer,
 	}
 
 	// Setup test database state here

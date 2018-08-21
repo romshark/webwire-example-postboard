@@ -25,7 +25,5 @@ func (rsv *resolver) GetMessages(
 	}
 
 	// Messages successfully retrieved
-	return api.GetMessagesReturn{
-		Messages: result,
-	}, nil
+	return result, nil
 }

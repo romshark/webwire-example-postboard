@@ -1,6 +1,7 @@
 package api
 
 import (
+	"encoding/json"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -49,4 +50,14 @@ func (tp *UserType) FromString(str string) error {
 		)
 	}
 	return nil
+}
+
+// MarshalJSON implements the json.Marshaler interface
+func (tp UserType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(tp.String())
+}
+
+// UnmarshalJSON implements the json.Unmarshaler interface
+func (tp *UserType) UnmarshalJSON(bytes []byte) (err error) {
+	return tp.FromString(string(bytes[1 : len(bytes)-1]))
 }

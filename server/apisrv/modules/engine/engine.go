@@ -29,11 +29,12 @@ type Engine interface {
 	// Returns an error if the identifier or username are already reserved
 	CreateUser(newAccount *api.User, passwordHash string) error
 
+	// GetUser retrieves the user profile by identifier
+	GetUser(ident api.Identifier) (*api.User, error)
+
 	// GetMessages retrieves the messages identified by the given 'identifiers'
-	// in the same order
-	GetMessages(
-		identifiers []api.Identifier,
-	) ([]*api.Message, error)
+	// returning them in the same order as 'identifiers'
+	GetMessages(identifiers []api.Identifier) ([]*api.Message, error)
 
 	// GetMessagesAfter retrieves n messages (n = 'limit') after the message
 	// identified by 'after'.

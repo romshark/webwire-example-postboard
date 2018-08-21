@@ -12,5 +12,5 @@ type Message struct {
 
 	// Reactions represents a list of reactions to this message
 	// indexed by the reaction authors
-	Reactions map[Identifier]*MessageReaction `json:"reaction"`
+	Reactions []MessageReaction `json:"reaction"`
 }

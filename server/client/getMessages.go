@@ -11,9 +11,9 @@ func (c *apiClient) GetMessages(
 	ctx context.Context,
 	params api.GetMessagesParams,
 ) ([]*api.Message, error) {
-	var result api.GetMessagesReturn
-	if err := c.Query(ctx, api.GetMessages, params, result); err != nil {
+	result := make([]*api.Message, 0)
+	if err := c.Query(ctx, api.GetMessages, params, &result); err != nil {
 		return nil, err
 	}
-	return result.Messages, nil
+	return result, nil
 }

@@ -10,8 +10,9 @@ import (
 	"github.com/qbeon/webwire-messenger/server/test/setup"
 )
 
-// TestLoginRoot tests login to root account
+// TestLoginRoot tests logging in to the root account created by default
 func TestLoginRoot(t *testing.T) {
+	t.Parallel()
 	ts := setup.New(t, stats)
 	defer ts.Teardown()
 

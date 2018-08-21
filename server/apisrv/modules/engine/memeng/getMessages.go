@@ -30,5 +30,5 @@ func (eng *engine) GetMessages(
 		}
 	}
 
-	return nil, nil
+	return result, nil
 }
