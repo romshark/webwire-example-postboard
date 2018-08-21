@@ -10,34 +10,34 @@ import (
 type MessageReactionType int
 
 const (
-	// Celebration
+	// Celebration represents a reaction emotion
 	Celebration MessageReactionType = iota
 
-	// Love
+	// Love represents a reaction emotion
 	Love
 
-	// Anger
+	// Anger represents a reaction emotion
 	Anger
 
-	// Approval
+	// Approval represents a reaction emotion
 	Approval
 
-	// Confusion
+	// Confusion represents a reaction emotion
 	Confusion
 
-	// Fear
+	// Fear represents a reaction emotion
 	Fear
 
-	// Thinking
+	// Thinking represents a reaction emotion
 	Thinking
 
-	// Dislike
+	// Dislike represents a reaction emotion
 	Dislike
 
-	// Cry
+	// Cry represents a reaction emotion
 	Cry
 
-	// Shock
+	// Shock represents a reaction emotion
 	Shock
 )
 

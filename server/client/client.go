@@ -6,6 +6,7 @@ import (
 	"github.com/qbeon/webwire-messenger/server/apisrv/api"
 )
 
+// Hooks represents the hook functions used for hookable API client events
 type Hooks struct {
 	OnSessionCreated func(*wwr.Session)
 	OnSessionClosed  func()

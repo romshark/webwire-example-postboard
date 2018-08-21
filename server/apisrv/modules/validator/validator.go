@@ -19,6 +19,7 @@ type validator struct {
 	MaxPasswordLength            uint32
 }
 
+// NewValidator creates a new validator module instance
 func NewValidator(
 	usernameRule *regexp.Regexp,
 	nameRule *regexp.Regexp,

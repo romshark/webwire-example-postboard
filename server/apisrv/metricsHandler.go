@@ -8,8 +8,10 @@ import (
 	"github.com/qbeon/webwire-messenger/server/apisrv/util"
 )
 
+// MetricsHandler represents the handler used for handling metric requests
 type MetricsHandler struct{}
 
+// NewMetricsHandler creates a new metrics handler instance
 func NewMetricsHandler() *MetricsHandler {
 	return &MetricsHandler{}
 }
