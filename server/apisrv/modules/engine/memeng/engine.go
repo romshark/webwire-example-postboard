@@ -49,10 +49,10 @@ func New(
 		passwordHasher: passwordHasher,
 
 		// Initialize the users store
-		users: make(map[api.Identifier]*UserAccount, 0),
+		users: make(map[api.Identifier]*UserAccount),
 
 		// Initialize the users.username index
-		usersByUsername: make(map[string]*UserAccount, 0),
+		usersByUsername: make(map[string]*UserAccount),
 
 		// Preallocate the sessions store
 		sessions: make(map[string]*wwr.Session, preallocSessions),
