@@ -6,7 +6,9 @@ import (
 	"github.com/qbeon/webwire-messenger/server/test/setup/generate"
 )
 
-// CreateUserRand creates a new random user account
+// CreateUserRand creates a random user profile with random fields
+// expecting the operation to be successful, retrieves the profile
+// and verifies whether all fields of the profile are correct
 func (h *Helper) CreateUserRand(
 	admin client.ApiClient,
 	userType api.UserType,

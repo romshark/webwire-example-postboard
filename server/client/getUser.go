@@ -15,5 +15,8 @@ func (c *apiClient) GetUser(
 	if err := c.Query(ctx, api.GetUser, params, profile); err != nil {
 		return nil, err
 	}
+	if profile.Identifier.IsNull() {
+		return nil, nil
+	}
 	return profile, nil
 }

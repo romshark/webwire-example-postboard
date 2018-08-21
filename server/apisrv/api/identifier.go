@@ -58,3 +58,13 @@ func (id *Identifier) UnmarshalJSON(bytes []byte) (err error) {
 	}
 	return id.FromString(string(bytes[1:33]))
 }
+
+// IsNull return true if the identifier is nulled
+func (id *Identifier) IsNull() bool {
+	for i := 0; i < 16; i++ {
+		if id.bytes[i] != 0 {
+			return false
+		}
+	}
+	return true
+}

@@ -11,6 +11,7 @@ import (
 )
 
 // newClient creates and connects a new client
+// verifying whether the connection was successfully established
 func (ts *TestSetup) newClient() client.ApiClient {
 	// Initialize webwire API client
 	clt := client.New(

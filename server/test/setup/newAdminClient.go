@@ -10,6 +10,8 @@ import (
 )
 
 // NewAdminClient creates and connects a new administrator client
+// verifying whether the connection was successfully established
+// and whether the session is correct
 func (ts *TestSetup) NewAdminClient(
 	username,
 	password string,

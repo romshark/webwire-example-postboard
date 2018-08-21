@@ -132,13 +132,15 @@ func (sr *StatisticsRecorder) Compute() *Statistics {
 		if avgSetupTime == 0 {
 			avgSetupTime = testStats.SetupTime
 		} else {
-			avgSetupTime = avgSetupTime + (testStats.SetupTime-avgSetupTime)/time.Duration(i)
+			avgSetupTime = avgSetupTime +
+				(testStats.SetupTime-avgSetupTime)/time.Duration(i)
 		}
 		// Determine average teardown time
 		if avgTeardownTime == 0 {
 			avgTeardownTime = testStats.TeardownTime
 		} else {
-			avgTeardownTime = avgTeardownTime + (testStats.TeardownTime-avgTeardownTime)/time.Duration(i)
+			avgTeardownTime = avgTeardownTime +
+				(testStats.TeardownTime-avgTeardownTime)/time.Duration(i)
 		}
 	}
 

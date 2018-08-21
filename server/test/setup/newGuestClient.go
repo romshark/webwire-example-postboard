@@ -6,6 +6,7 @@ import (
 )
 
 // NewGuestClient creates and connects a new guest client
+// verifying whether the connection was successfully established
 func (ts *TestSetup) NewGuestClient() client.ApiClient {
 	clt := ts.newClient()
 

@@ -9,8 +9,9 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// CreateUser helps creating a user profile expecting the operation
-// to be successful, retrieves the profile and returns it
+// CreateUser creates a user profile expecting the operation
+// to be successful, retrieves the profile and verifies whether all fields
+// of the profile are correct
 func (h *Helper) CreateUser(
 	admin client.ApiClient,
 	params api.CreateUserParams,

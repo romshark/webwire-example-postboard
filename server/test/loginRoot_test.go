@@ -10,15 +10,17 @@ import (
 	"github.com/qbeon/webwire-messenger/server/test/setup"
 )
 
-// TestLoginRoot tests logging in to the root account created by default
-func TestLoginRoot(t *testing.T) {
-	t.Parallel()
-	ts := setup.New(t, stats)
-	defer ts.Teardown()
+// TestLogin tests login
+func TestLogin(t *testing.T) {
+	t.Run("AsRoot", func(t *testing.T) {
+		t.Parallel()
+		ts := setup.New(t, stats)
+		defer ts.Teardown()
 
-	clt := ts.NewGuestClient()
-	require.NoError(t, clt.Login(context.Background(), api.LoginParams{
-		Username: "root",
-		Password: "root",
-	}))
+		clt := ts.NewGuestClient()
+		require.NoError(t, clt.Login(context.Background(), api.LoginParams{
+			Username: "root",
+			Password: "root",
+		}))
+	})
 }

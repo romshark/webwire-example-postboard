@@ -10,6 +10,8 @@ import (
 )
 
 // NewUserClient creates and connects a new regular user client
+// verifying whether the connection was successfully established
+// and whether the session is correct
 func (ts *TestSetup) NewUserClient(
 	username,
 	password string,

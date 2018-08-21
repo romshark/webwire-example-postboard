@@ -8,15 +8,16 @@ import (
 )
 
 // TestCreateUser tests user account creation
+// by a root administrator client
 func TestCreateUser(t *testing.T) {
 	t.Parallel()
 	ts := setup.New(t, stats)
 	defer ts.Teardown()
 
-	admin := ts.NewAdminClient("root", "root")
+	root := ts.NewAdminClient("root", "root")
 
 	ts.Helper.CreateUser(
-		admin,
+		root,
 		api.CreateUserParams{
 			FirstName: "testFirstName",
 			LastName:  "testLastName",

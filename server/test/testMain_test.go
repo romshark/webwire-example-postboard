@@ -5,6 +5,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/qbeon/webwire-messenger/server/client"
 	"github.com/qbeon/webwire-messenger/server/test/setup"
 )
 
@@ -32,3 +33,6 @@ func TestMain(m *testing.M) {
 
 	os.Exit(exitCode)
 }
+
+// Readers represents a list of API clients
+type Readers []client.ApiClient

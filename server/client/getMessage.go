@@ -15,5 +15,8 @@ func (c *apiClient) GetMessage(
 	if err := c.Query(ctx, api.GetMessage, params, result); err != nil {
 		return nil, err
 	}
+	if result.Identifier.IsNull() {
+		return nil, nil
+	}
 	return result, nil
 }

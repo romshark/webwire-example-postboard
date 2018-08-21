@@ -76,39 +76,37 @@ func TestPostMessage(t *testing.T) {
 		}
 	}
 
-	t.Run("FromRoot", func(t *testing.T) {
+	t.Run("AsRoot", func(t *testing.T) {
 		t.Parallel()
 		ts := setup.New(t, stats)
 		defer ts.Teardown()
 
-		admin := ts.NewAdminClient("root", "root")
+		root := ts.NewAdminClient("root", "root")
 
 		// Create random test users
-		_, _, user1 := ts.Helper.CreateUserRand(admin, api.UtUser)
-		_, _, user2 := ts.Helper.CreateUserRand(admin, api.UtUser)
+		_, _, user1 := ts.Helper.CreateUserRand(root, api.UtUser)
+		_, _, user2 := ts.Helper.CreateUserRand(root, api.UtUser)
 		guest := ts.NewGuestClient()
 
 		testPostingAndReading(
 			t,
-			ts,    // Test setup
-			admin, // Author
-			[]string{"test message"}, // Message contents
-			[]client.ApiClient{
-				guest, admin, user1, user2,
-			}, // Readers
+			ts,   // Test setup
+			root, // Author
+			[]string{"test message"},           // Message contents
+			Readers{root, guest, user1, user2}, // Readers
 		)
 	})
 
-	t.Run("FromUser", func(t *testing.T) {
+	t.Run("AsUser", func(t *testing.T) {
 		t.Parallel()
 		ts := setup.New(t, stats)
 		defer ts.Teardown()
 
-		admin := ts.NewAdminClient("root", "root")
+		root := ts.NewAdminClient("root", "root")
 
 		// Create random test users
-		_, _, user1 := ts.Helper.CreateUserRand(admin, api.UtUser)
-		_, _, user2 := ts.Helper.CreateUserRand(admin, api.UtUser)
+		_, _, user1 := ts.Helper.CreateUserRand(root, api.UtUser)
+		_, _, user2 := ts.Helper.CreateUserRand(root, api.UtUser)
 		guest := ts.NewGuestClient()
 
 		// Ensure all users can read the message including the author himself
@@ -117,31 +115,29 @@ func TestPostMessage(t *testing.T) {
 			t,
 			ts,    // Test setup
 			user1, // Author
-			[]string{"test message"}, // Message contents
-			[]client.ApiClient{
-				guest, admin, user1, user2,
-			}, // Readers
+			[]string{"test message"},           // Message contents
+			Readers{root, guest, user1, user2}, // Readers
 		)
 	})
 
-	t.Run("MultipleFromRoot", func(t *testing.T) {
+	t.Run("AsRoot_Multiple", func(t *testing.T) {
 		t.Parallel()
 		ts := setup.New(t, stats)
 		defer ts.Teardown()
 
-		admin := ts.NewAdminClient("root", "root")
+		root := ts.NewAdminClient("root", "root")
 
 		// Create random test users
-		_, _, user1 := ts.Helper.CreateUserRand(admin, api.UtUser)
-		_, _, user2 := ts.Helper.CreateUserRand(admin, api.UtUser)
+		_, _, user1 := ts.Helper.CreateUserRand(root, api.UtUser)
+		_, _, user2 := ts.Helper.CreateUserRand(root, api.UtUser)
 		guest := ts.NewGuestClient()
 
 		// Ensure all users can read the message including the author himself
 		// and the message is as expected
 		testPostingAndReading(
 			t,
-			ts,    // Test setup
-			admin, // Author
+			ts,   // Test setup
+			root, // Author
 			[]string{
 				"first test message",
 				"second test message",
@@ -149,22 +145,20 @@ func TestPostMessage(t *testing.T) {
 				"fourth test message",
 				"fifth test message",
 			}, // Message contents
-			[]client.ApiClient{
-				guest, admin, user1, user2,
-			}, // Readers
+			Readers{root, guest, user1, user2}, // Readers
 		)
 	})
 
-	t.Run("MultipleFromUser", func(t *testing.T) {
+	t.Run("AsUser_Multiple", func(t *testing.T) {
 		t.Parallel()
 		ts := setup.New(t, stats)
 		defer ts.Teardown()
 
-		admin := ts.NewAdminClient("root", "root")
+		root := ts.NewAdminClient("root", "root")
 
 		// Create random test users
-		_, _, user1 := ts.Helper.CreateUserRand(admin, api.UtUser)
-		_, _, user2 := ts.Helper.CreateUserRand(admin, api.UtUser)
+		_, _, user1 := ts.Helper.CreateUserRand(root, api.UtUser)
+		_, _, user2 := ts.Helper.CreateUserRand(root, api.UtUser)
 		guest := ts.NewGuestClient()
 
 		// Ensure all users can read the message including the author himself
@@ -180,9 +174,7 @@ func TestPostMessage(t *testing.T) {
 				"fourth test message",
 				"fifth test message",
 			}, // Message contents
-			[]client.ApiClient{
-				guest, admin, user1, user2,
-			}, // Readers
+			Readers{root, guest, user1, user2}, // Readers
 		)
 	})
 }
