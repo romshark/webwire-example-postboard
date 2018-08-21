@@ -1,8 +1,6 @@
 package client
 
 import (
-	"testing"
-
 	wwr "github.com/qbeon/webwire-go"
 	wwrclt "github.com/qbeon/webwire-go/client"
 	"github.com/qbeon/webwire-messenger/server/apisrv/api"
@@ -17,7 +15,6 @@ type Hooks struct {
 
 // apiClient implements the wwrclt.Implementation interface
 type apiClient struct {
-	t          *testing.T
 	connection wwrclt.Client
 	hooks      Hooks
 }
