@@ -14,7 +14,7 @@ import (
 func TestLogin(t *testing.T) {
 	t.Run("AsRoot", func(t *testing.T) {
 		t.Parallel()
-		ts := setup.New(t, stats)
+		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
 		clt := ts.NewGuestClient()

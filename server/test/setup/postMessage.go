@@ -34,7 +34,7 @@ func (h *Helper) PostMessage(
 	require.WithinDuration(h.t,
 		time.Now().UTC(),
 		message.Publication,
-		1*time.Second,
+		h.ts.MaxCreationTimeDeviation(),
 	)
 	require.Equal(h.t, author.Identifier().String(), message.Author.String())
 	require.Nil(h.t,

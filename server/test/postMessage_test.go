@@ -69,7 +69,7 @@ func TestPostMessage(t *testing.T) {
 				require.WithinDuration(t,
 					time.Now().UTC(),
 					retrievedMessage.Publication,
-					3*time.Second,
+					ts.MaxCreationTimeDeviation(),
 				)
 				require.Nil(t, retrievedMessage.Reactions)
 			}
@@ -78,7 +78,7 @@ func TestPostMessage(t *testing.T) {
 
 	t.Run("AsRoot", func(t *testing.T) {
 		t.Parallel()
-		ts := setup.New(t, stats)
+		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
 		root := ts.NewAdminClient("root", "root")
@@ -99,7 +99,7 @@ func TestPostMessage(t *testing.T) {
 
 	t.Run("AsUser", func(t *testing.T) {
 		t.Parallel()
-		ts := setup.New(t, stats)
+		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
 		root := ts.NewAdminClient("root", "root")
@@ -122,7 +122,7 @@ func TestPostMessage(t *testing.T) {
 
 	t.Run("AsRoot_Multiple", func(t *testing.T) {
 		t.Parallel()
-		ts := setup.New(t, stats)
+		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
 		root := ts.NewAdminClient("root", "root")
@@ -151,7 +151,7 @@ func TestPostMessage(t *testing.T) {
 
 	t.Run("AsUser_Multiple", func(t *testing.T) {
 		t.Parallel()
-		ts := setup.New(t, stats)
+		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
 		root := ts.NewAdminClient("root", "root")

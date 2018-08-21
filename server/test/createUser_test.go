@@ -11,7 +11,7 @@ import (
 // by a root administrator client
 func TestCreateUser(t *testing.T) {
 	t.Parallel()
-	ts := setup.New(t, stats)
+	ts := setup.New(t, setupConf)
 	defer ts.Teardown()
 
 	root := ts.NewAdminClient("root", "root")

@@ -2,27 +2,35 @@ package setup
 
 import (
 	"testing"
+	"time"
 
 	"github.com/qbeon/webwire-messenger/server/apisrv/config"
 )
 
+// Config represents the test setup configuration
+type Config struct {
+	statisticsRecorder              *StatisticsRecorder
+	defaultMaxCreationTimeDeviation time.Duration
+	serverConfig                    config.Config
+}
+
+// NewConfig creates a new test setup configuration
+func NewConfig(
+	statisticsRecorder *StatisticsRecorder,
+	defaultMaxCreationTimeDeviation time.Duration,
+	serverConfig config.Config,
+) *Config {
+	return &Config{
+		statisticsRecorder:              statisticsRecorder,
+		defaultMaxCreationTimeDeviation: defaultMaxCreationTimeDeviation,
+		serverConfig:                    serverConfig,
+	}
+}
+
 // New creates a new test setup
-func New(t *testing.T, statsRec *StatisticsRecorder) *TestSetup {
+func New(t *testing.T, conf *Config) *TestSetup {
 	// Load & rewrite configuration here
 
 	// Create a new test setup with the following server configuration
-	return newTestSetup(t, statsRec, config.Config{
-		// Make the server automatically pick ports in testing mode
-		ServerAddress:        "127.0.0.1:",
-		MetricsServerAddress: "127.0.0.1:",
-
-		// Disable TLS encryption in testing mode
-		TLS: nil,
-
-		// Log to console in testing mode
-		Log: &config.LogConfig{
-			// Disable debug logging during testing
-			DebugEnabled: false,
-		},
-	})
+	return newTestSetup(t, conf)
 }

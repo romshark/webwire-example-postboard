@@ -60,7 +60,7 @@ func (h *Helper) CreateUser(
 	require.WithinDuration(h.t,
 		time.Now().UTC(),
 		profile.Registration,
-		3*time.Second,
+		h.ts.MaxCreationTimeDeviation(),
 	)
 
 	return profile, user

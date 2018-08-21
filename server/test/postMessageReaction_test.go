@@ -12,7 +12,7 @@ func TestPostMessageReaction(t *testing.T) {
 
 	t.Run("AsRoot_ToUsersMessage", func(t *testing.T) {
 		t.Parallel()
-		ts := setup.New(t, stats)
+		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
 		root := ts.NewAdminClient("root", "root")
@@ -35,7 +35,7 @@ func TestPostMessageReaction(t *testing.T) {
 
 	t.Run("AsUser_ToRootMessage", func(t *testing.T) {
 		t.Parallel()
-		ts := setup.New(t, stats)
+		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
 		root := ts.NewAdminClient("root", "root")

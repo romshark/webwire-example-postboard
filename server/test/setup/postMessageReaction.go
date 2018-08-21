@@ -77,7 +77,7 @@ func (h *Helper) PostMessageReaction(
 	require.WithinDuration(h.t,
 		time.Now().UTC(),
 		lastReaction.Creation,
-		1*time.Second,
+		h.ts.MaxCreationTimeDeviation(),
 	)
 
 	return &reactionsAfter[len(reactionsAfter)-1]

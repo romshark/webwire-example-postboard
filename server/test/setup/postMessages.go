@@ -64,7 +64,7 @@ func (h *Helper) PostMessages(
 			require.WithinDuration(h.t,
 				time.Now().UTC(),
 				retrievedMessage.Publication,
-				3*time.Second,
+				h.ts.MaxCreationTimeDeviation(),
 			)
 			require.Nil(h.t, retrievedMessage.Reactions)
 		}

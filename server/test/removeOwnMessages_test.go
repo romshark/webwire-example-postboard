@@ -51,7 +51,7 @@ func TestRemoveOwnMessages(t *testing.T) {
 
 	t.Run("AsRoot", func(t *testing.T) {
 		t.Parallel()
-		ts := setup.New(t, stats)
+		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
 		root := ts.NewAdminClient("root", "root")
@@ -71,7 +71,7 @@ func TestRemoveOwnMessages(t *testing.T) {
 
 	t.Run("AsUser", func(t *testing.T) {
 		t.Parallel()
-		ts := setup.New(t, stats)
+		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
 		root := ts.NewAdminClient("root", "root")

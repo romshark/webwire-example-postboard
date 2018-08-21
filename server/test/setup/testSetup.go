@@ -5,14 +5,13 @@ import (
 	"time"
 
 	"github.com/qbeon/webwire-messenger/server/apisrv"
-	"github.com/qbeon/webwire-messenger/server/apisrv/config"
 	"github.com/qbeon/webwire-messenger/server/client"
 )
 
 // TestSetup represents the prepared setup of an individual test
 type TestSetup struct {
 	t       *testing.T
-	stats   *StatisticsRecorder
+	conf    *Config
 	clients []client.ApiClient
 
 	ApiServer apisrv.ApiServer
@@ -20,23 +19,19 @@ type TestSetup struct {
 }
 
 // newTestSetup creates a new test setup
-func newTestSetup(
-	t *testing.T,
-	statsRec *StatisticsRecorder,
-	config config.Config,
-) *TestSetup {
+func newTestSetup(t *testing.T, conf *Config) *TestSetup {
 	// Start recording test setup time
 	start := time.Now()
 
 	// Setup test database and connections to it here
 
 	// Launch API server
-	apiServer := launchApiServer(t, config)
+	apiServer := launchApiServer(t, conf.serverConfig)
 
 	// Create a new test setup instance
 	testSetup := &TestSetup{
 		t:         t,
-		stats:     statsRec,
+		conf:      conf,
 		clients:   make([]client.ApiClient, 0, 3),
 		ApiServer: apiServer,
 	}
@@ -51,11 +46,17 @@ func newTestSetup(
 	// Setup test database state here
 
 	// Record test setup time
-	statsRec.Set(t, func(stat *TestStatistics) {
+	conf.statisticsRecorder.Set(t, func(stat *TestStatistics) {
 		stat.SetupTime = time.Since(start)
 	})
 
 	return testSetup
+}
+
+// MaxCreationTimeDeviation returns the configured maximum accepted
+// entity creation time deviation duration
+func (ts *TestSetup) MaxCreationTimeDeviation() time.Duration {
+	return ts.conf.defaultMaxCreationTimeDeviation
 }
 
 // Teardown gracefully terminates the test,
@@ -78,7 +79,7 @@ func (ts *TestSetup) Teardown() {
 	// Delete test database here
 
 	// Record test teardown time
-	ts.stats.Set(ts.t, func(stat *TestStatistics) {
+	ts.conf.statisticsRecorder.Set(ts.t, func(stat *TestStatistics) {
 		stat.TeardownTime = time.Since(start)
 	})
 }
