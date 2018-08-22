@@ -2,7 +2,7 @@ language: go
 
 go:
   - master
-  - "1.10"
+  - "1.10.3"
 
 install: true
 
@@ -24,14 +24,14 @@ before_script:
 
 script:
   # Run all the tests with the race detector enabled
-  - overalls -project=github.com/qbeon/webwire-example-postboard -covermode=atomic -debug -- -race -v -coverpkg=./...
+  - overalls -project=github.com/qbeon/webwire-example-postboard -covermode=atomic -debug -- -race -v -coverpkg=./server/...
   - $HOME/gopath/bin/goveralls -coverprofile=overalls.coverprofile -service=travis-ci -repotoken $COVERALLS_TOKEN
 
   # go vet is the official Go static analyzer
-  - go vet ./...
+  - go vet ./server/...
 
   # "go vet on steroids" + linter
-  - megacheck ./...
+  - megacheck ./server/...
 
   # one last linter
   #- golint -set_exit_status $(go list ./...) # Uncomment when fixed in upstream
