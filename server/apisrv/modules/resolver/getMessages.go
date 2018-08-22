@@ -20,7 +20,7 @@ func (rsv *resolver) GetMessages(
 		params.After,
 		params.Limit,
 	)
-	if err := rsv.handleError(err); err != nil {
+	if err != nil {
 		return nil, err
 	}
 

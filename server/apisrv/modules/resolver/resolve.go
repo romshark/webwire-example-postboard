@@ -124,6 +124,15 @@ func (rsv *resolver) Resolve(
 				Code:    engiface.ErrInvalidRequest.String(),
 				Message: err.Error(),
 			}
+		} else if engErr := engiface.ToEngineError(err); engErr != nil {
+			// Wrap engine-errors
+			err = wwr.ReqErr{
+				Code:    engErr.Code.String(),
+				Message: engErr.Error(),
+			}
+		} else if err != nil {
+			// Log an internal error
+			rsv.logInternalError(err)
 		}
 		return nil, err
 	}

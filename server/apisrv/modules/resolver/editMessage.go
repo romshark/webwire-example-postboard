@@ -31,7 +31,7 @@ func (rsv *resolver) EditMessage(
 	retrieved, err := rsv.engine.GetMessages(
 		[]api.Identifier{params.MessageIdent},
 	)
-	if err := rsv.handleError(err); err != nil {
+	if err != nil {
 		return nil, err
 	}
 
@@ -47,12 +47,11 @@ func (rsv *resolver) EditMessage(
 	}
 
 	// Instruct the engine to edit the message
-	err = rsv.engine.EditMessage(
+	if err := rsv.engine.EditMessage(
 		params.MessageIdent,
 		time.Now().UTC(),
 		params.NewContents,
-	)
-	if err := rsv.handleError(err); err != nil {
+	); err != nil {
 		return nil, err
 	}
 

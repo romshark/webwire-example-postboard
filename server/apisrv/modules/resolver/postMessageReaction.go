@@ -28,7 +28,7 @@ func (rsv *resolver) PostMessageReaction(
 	retrieved, err := rsv.engine.GetMessages(
 		[]api.Identifier{params.MessageIdent},
 	)
-	if err := rsv.handleError(err); err != nil {
+	if err != nil {
 		return nil, err
 	}
 
@@ -54,7 +54,7 @@ func (rsv *resolver) PostMessageReaction(
 	newIdent := api.NewIdentifier()
 
 	// Instruct the engine to add the new message reaction
-	err = rsv.engine.PostMessageReaction(
+	if err := rsv.engine.PostMessageReaction(
 		params.MessageIdent,
 		&api.MessageReaction{
 			Ident:       newIdent,
@@ -63,8 +63,7 @@ func (rsv *resolver) PostMessageReaction(
 			Description: params.Description,
 			Creation:    time.Now().UTC(),
 		},
-	)
-	if err := rsv.handleError(err); err != nil {
+	); err != nil {
 		return nil, err
 	}
 

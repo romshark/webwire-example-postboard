@@ -23,7 +23,7 @@ func (h *Helper) CreateUserRand(
 			LastName:  randomProfile.LastName,
 			Username:  randomProfile.Username,
 			Password:  randomPassword,
-			Type:      randomProfile.Type,
+			Type:      userType,
 		},
 	)
 

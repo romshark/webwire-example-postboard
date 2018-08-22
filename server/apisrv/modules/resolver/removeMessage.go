@@ -27,7 +27,7 @@ func (rsv *resolver) RemoveMessage(
 	retrieved, err := rsv.engine.GetMessages(
 		[]api.Identifier{params.MessageIdent},
 	)
-	if err := rsv.handleError(err); err != nil {
+	if err != nil {
 		return nil, err
 	}
 
@@ -50,8 +50,7 @@ func (rsv *resolver) RemoveMessage(
 	}
 
 	// Instruct the engine to remove the message
-	err = rsv.engine.RemoveMessage(params.MessageIdent)
-	if err := rsv.handleError(err); err != nil {
+	if err := rsv.engine.RemoveMessage(params.MessageIdent); err != nil {
 		return nil, err
 	}
 

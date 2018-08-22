@@ -26,13 +26,12 @@ func (rsv *resolver) PostMessage(
 	newIdent := api.NewIdentifier()
 
 	// Instruct the engine to create a new message
-	err := rsv.engine.PostMessage(&api.Message{
+	if err := rsv.engine.PostMessage(&api.Message{
 		Identifier:  newIdent,
 		Author:      session.UserIdentifier,
 		Publication: time.Now().UTC(),
 		Contents:    params.Contents,
-	})
-	if err := rsv.handleError(err); err != nil {
+	}); err != nil {
 		return nil, err
 	}
 

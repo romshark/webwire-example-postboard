@@ -23,7 +23,7 @@ func (rsv *resolver) GetUser(
 
 	// Instruct the engine to find the user profile
 	profile, err := rsv.engine.GetUser(params.Ident)
-	if err := rsv.handleError(err); err != nil {
+	if err != nil {
 		return nil, err
 	}
 

@@ -41,17 +41,14 @@ func (rsv *resolver) CreateUser(
 	// Encrypt password
 	hashedPassword, err := rsv.passwordHasher.Hash(params.Password)
 	if err != nil {
-		return nil, rsv.logInternalError(errors.Wrap(
-			err,
-			"couldn't hash password",
-		))
+		return nil, errors.Wrap(err, "couldn't hash password")
 	}
 
 	// Generate a new universally unique account identifier
 	newIdent := api.NewIdentifier()
 
 	// Instruct the engine to create a new user account
-	err = rsv.engine.CreateUser(&api.User{
+	if err = rsv.engine.CreateUser(&api.User{
 		Identifier:   newIdent,
 		FirstName:    params.FirstName,
 		LastName:     params.LastName,
@@ -59,8 +56,7 @@ func (rsv *resolver) CreateUser(
 		Registration: time.Now().UTC(),
 		Reputation:   0,
 		Type:         params.Type,
-	}, hashedPassword)
-	if err := rsv.handleError(err); err != nil {
+	}, hashedPassword); err != nil {
 		return nil, err
 	}
 

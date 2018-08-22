@@ -9,6 +9,8 @@ import (
 	"github.com/qbeon/webwire-messenger/server/apisrv/api"
 )
 
+// Query performs an API request unmarshalls the incoming JSON result
+// into 'result'
 func (c *apiClient) Query(
 	ctx context.Context,
 	method api.Method,

@@ -12,7 +12,7 @@ func (rsv *resolver) GetMessage(
 ) (interface{}, error) {
 	// Instruct the engine to find the message
 	messages, err := rsv.engine.GetMessages([]api.Identifier{params.Ident})
-	if err := rsv.handleError(err); err != nil {
+	if err != nil {
 		return nil, err
 	}
 

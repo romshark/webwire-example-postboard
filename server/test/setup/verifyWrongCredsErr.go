@@ -5,13 +5,13 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// VerifyUnauthErr helps ensuring that the given error is an unauth-error
-// with an error message included
-func (h *Helper) VerifyUnauthErr(err error) {
+// VerifyWrongCredsErr helps ensuring that the given error is
+// a wrong-credentials error with an error message included
+func (h *Helper) VerifyWrongCredsErr(err error) {
 	require.Error(h.t, err)
 	require.IsType(h.t, wwr.ReqErr{}, err)
 
 	reqErr := err.(wwr.ReqErr)
-	require.Equal(h.t, "UNAUTHORIZED", reqErr.Code)
+	require.Equal(h.t, "WRONG_CREDENTIALS", reqErr.Code)
 	require.True(h.t, len(reqErr.Message) > 1)
 }

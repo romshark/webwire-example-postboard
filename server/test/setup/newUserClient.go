@@ -38,7 +38,7 @@ func (ts *TestSetup) NewUserClient(
 	require.NotEqual(ts.t, api.Identifier{}, sessionInfo.UserIdentifier)
 
 	// Verify user type
-	require.Equal(ts.t, api.UtUser, sessionInfo.UserType)
+	require.Equal(ts.t, api.UtUser.String(), sessionInfo.UserType.String())
 
 	return clt
 }

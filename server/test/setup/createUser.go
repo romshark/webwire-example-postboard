@@ -24,17 +24,25 @@ func (h *Helper) CreateUser(
 			LastName:  params.LastName,
 			Username:  params.Username,
 			Password:  params.Password,
-			Type:      api.UtUser,
+			Type:      params.Type,
 		},
 	)
 	require.NoError(h.t, err)
 	require.False(h.t, newUserIdent.IsNull())
 
 	// Log in to the newly created account
-	user := h.ts.NewUserClient(params.Username, params.Password)
+	var clt client.ApiClient
+	if params.Type == api.UtAdmin {
+		clt = h.ts.NewAdminClient(params.Username, params.Password)
+	} else if params.Type == api.UtUser {
+		clt = h.ts.NewUserClient(params.Username, params.Password)
+	} else {
+		h.ts.t.Errorf("unsupported user type: %s", params.Type)
+		return nil, nil
+	}
 
 	// Verify session identifier
-	session := user.Session()
+	session := clt.Session()
 	require.NotNil(h.t, session.Info.Value("id"))
 	require.IsType(h.t, api.Identifier{}, session.Info.Value("id"))
 	sessionIdent := session.Info.Value("id").(api.Identifier)
@@ -45,8 +53,8 @@ func (h *Helper) CreateUser(
 	)
 
 	// Retrieve profile
-	profile, err := user.GetUser(context.Background(), api.GetUserParams{
-		Ident: *user.Identifier(),
+	profile, err := clt.GetUser(context.Background(), api.GetUserParams{
+		Ident: *clt.Identifier(),
 	})
 	require.NoError(h.t, err)
 	require.NotNil(h.t, profile)
@@ -55,7 +63,7 @@ func (h *Helper) CreateUser(
 	require.Equal(h.t, params.FirstName, profile.FirstName)
 	require.Equal(h.t, params.LastName, profile.LastName)
 	require.Equal(h.t, params.Username, profile.Username)
-	require.Equal(h.t, params.Type, profile.Type)
+	require.Equal(h.t, params.Type.String(), profile.Type.String())
 	require.Equal(h.t, float64(0), profile.Reputation)
 	require.WithinDuration(h.t,
 		time.Now().UTC(),
@@ -63,5 +71,5 @@ func (h *Helper) CreateUser(
 		h.ts.MaxCreationTimeDeviation(),
 	)
 
-	return profile, user
+	return profile, clt
 }
