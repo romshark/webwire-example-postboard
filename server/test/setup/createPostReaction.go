@@ -36,6 +36,7 @@ func (h *Helper) CreatePostReaction(
 			PostIdent: postBefore.Ident,
 		},
 	)
+	require.NoError(h.t, err)
 	if reactionsBefore == nil {
 		reactionsBefore = make([]*api.PostReaction, 0)
 	}
@@ -59,6 +60,7 @@ func (h *Helper) CreatePostReaction(
 			PostIdent: postBefore.Ident,
 		},
 	)
+	require.NoError(h.t, err)
 	if reactionsAfter == nil {
 		reactionsAfter = make([]*api.PostReaction, 0)
 	}
