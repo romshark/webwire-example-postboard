@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
-	"github.com/qbeon/webwire-messenger/server/client"
-	"github.com/qbeon/webwire-messenger/server/test/setup"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/client"
+	"github.com/qbeon/webwire-example-postboard/server/test/setup"
 	"github.com/stretchr/testify/require"
 )
 

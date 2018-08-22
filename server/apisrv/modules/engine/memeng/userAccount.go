@@ -1,6 +1,6 @@
 package memeng
 
-import "github.com/qbeon/webwire-messenger/server/apisrv/api"
+import "github.com/qbeon/webwire-example-postboard/server/apisrv/api"
 
 // UserAccount defines a user account in-memory storage representation
 type UserAccount struct {

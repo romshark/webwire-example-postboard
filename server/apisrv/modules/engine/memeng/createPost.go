@@ -3,8 +3,8 @@ package memeng
 import (
 	"errors"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
-	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
+	engiface "github.com/qbeon/webwire-example-postboard/server/apisrv/modules/engine"
 )
 
 // createPost posts the new post `newPost` to the store

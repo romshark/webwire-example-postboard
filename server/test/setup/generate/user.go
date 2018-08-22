@@ -4,7 +4,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
 )
 
 // User generates a random user profile

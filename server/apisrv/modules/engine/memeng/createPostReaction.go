@@ -3,7 +3,7 @@ package memeng
 import (
 	"errors"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
 )
 
 // createPostReaction sets a new reaction to the post identified by

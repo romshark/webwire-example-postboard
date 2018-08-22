@@ -3,11 +3,11 @@ package resolver
 import (
 	"errors"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/modules/authorizer"
-	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
-	"github.com/qbeon/webwire-messenger/server/apisrv/modules/logger"
-	"github.com/qbeon/webwire-messenger/server/apisrv/modules/passhash"
-	"github.com/qbeon/webwire-messenger/server/apisrv/modules/validator"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/modules/authorizer"
+	engiface "github.com/qbeon/webwire-example-postboard/server/apisrv/modules/engine"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/modules/logger"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/modules/passhash"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/modules/validator"
 )
 
 type resolver struct {

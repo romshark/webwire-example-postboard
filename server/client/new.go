@@ -2,7 +2,7 @@ package client
 
 import (
 	wwrclt "github.com/qbeon/webwire-go/client"
-	"github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/sessinfo"
 )
 
 // New constructs a new API client instance

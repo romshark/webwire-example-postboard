@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/dam"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/dam"
 )
 
 // Tests the Wait method

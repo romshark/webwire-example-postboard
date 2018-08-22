@@ -1,7 +1,7 @@
 package setup
 
 import (
-	"github.com/qbeon/webwire-messenger/server/client"
+	"github.com/qbeon/webwire-example-postboard/server/client"
 	"github.com/stretchr/testify/require"
 )
 

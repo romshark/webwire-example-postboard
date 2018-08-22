@@ -1,9 +1,9 @@
 package setup
 
 import (
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
-	"github.com/qbeon/webwire-messenger/server/client"
-	"github.com/qbeon/webwire-messenger/server/test/setup/generate"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/client"
+	"github.com/qbeon/webwire-example-postboard/server/test/setup/generate"
 )
 
 // CreateUserRand creates a random user profile with random fields

@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
-	"github.com/qbeon/webwire-messenger/server/test/setup"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/test/setup"
 )
 
 // TestLoginWrongCreds tests login with wrong credentials

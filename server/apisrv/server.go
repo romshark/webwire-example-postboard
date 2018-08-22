@@ -7,11 +7,11 @@ import (
 
 	"github.com/pkg/errors"
 	wwr "github.com/qbeon/webwire-go"
-	"github.com/qbeon/webwire-messenger/server/apisrv/config"
-	"github.com/qbeon/webwire-messenger/server/apisrv/dam"
-	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
-	"github.com/qbeon/webwire-messenger/server/apisrv/modules/logger"
-	"github.com/qbeon/webwire-messenger/server/apisrv/modules/resolver"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/config"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/dam"
+	engiface "github.com/qbeon/webwire-example-postboard/server/apisrv/modules/engine"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/modules/logger"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/modules/resolver"
 )
 
 type apiServer struct {

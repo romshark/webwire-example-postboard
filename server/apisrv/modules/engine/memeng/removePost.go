@@ -1,6 +1,6 @@
 package memeng
 
-import "github.com/qbeon/webwire-messenger/server/apisrv/api"
+import "github.com/qbeon/webwire-example-postboard/server/apisrv/api"
 
 // removePost marks the post identified by `ident` as archived.
 // A `ErrPostNotFound` error is returned if it either doesn't exist

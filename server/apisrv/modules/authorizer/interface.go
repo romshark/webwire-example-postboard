@@ -1,6 +1,6 @@
 package authorizer
 
-import "github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
+import "github.com/qbeon/webwire-example-postboard/server/apisrv/sessinfo"
 
 // Condition represents an authorization condition interface
 type Condition interface {

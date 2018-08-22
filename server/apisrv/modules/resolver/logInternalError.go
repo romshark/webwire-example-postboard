@@ -1,7 +1,7 @@
 package resolver
 
 import (
-	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
+	engiface "github.com/qbeon/webwire-example-postboard/server/apisrv/modules/engine"
 )
 
 // logInternalError logs an internal error to the error log

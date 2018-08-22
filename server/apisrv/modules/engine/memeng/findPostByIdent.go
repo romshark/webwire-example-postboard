@@ -1,8 +1,8 @@
 package memeng
 
 import (
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
-	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
+	engiface "github.com/qbeon/webwire-example-postboard/server/apisrv/modules/engine"
 )
 
 // findPostByIdent finds and returns the post identified by `ident`.

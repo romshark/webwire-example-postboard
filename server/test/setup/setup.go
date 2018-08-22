@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/config"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/config"
 )
 
 // Config represents the test setup configuration

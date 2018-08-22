@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/util"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/util"
 )
 
 // MetricsHandler represents the handler used for handling metric requests

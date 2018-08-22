@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv"
 	"github.com/stretchr/testify/assert"
 )
 

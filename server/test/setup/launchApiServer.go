@@ -4,8 +4,8 @@ import (
 	"log"
 	"testing"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv"
-	"github.com/qbeon/webwire-messenger/server/apisrv/config"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/config"
 )
 
 // launchApiServer launches the API server instance in a separate goroutine

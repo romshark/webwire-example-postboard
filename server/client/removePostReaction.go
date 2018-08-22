@@ -3,7 +3,7 @@ package client
 import (
 	"context"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
 )
 
 // RemovePostReaction implements the ApiClient interface

@@ -3,8 +3,8 @@ package setup
 import (
 	"context"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
-	"github.com/qbeon/webwire-messenger/server/client"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/client"
 	"github.com/stretchr/testify/require"
 )
 

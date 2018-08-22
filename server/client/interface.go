@@ -4,7 +4,7 @@ import (
 	"context"
 
 	wwr "github.com/qbeon/webwire-go"
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
 )
 
 // ApiClient represents an API client

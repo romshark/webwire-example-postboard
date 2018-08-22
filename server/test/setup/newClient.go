@@ -6,7 +6,7 @@ import (
 	"time"
 
 	wwrclt "github.com/qbeon/webwire-go/client"
-	"github.com/qbeon/webwire-messenger/server/client"
+	"github.com/qbeon/webwire-example-postboard/server/client"
 	"github.com/stretchr/testify/require"
 )
 

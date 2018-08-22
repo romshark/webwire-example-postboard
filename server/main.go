@@ -4,8 +4,8 @@ import (
 	"flag"
 	"log"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv"
-	"github.com/qbeon/webwire-messenger/server/apisrv/config"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/config"
 )
 
 var addr = flag.String(

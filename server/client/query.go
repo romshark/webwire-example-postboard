@@ -6,7 +6,7 @@ import (
 
 	"github.com/pkg/errors"
 	wwr "github.com/qbeon/webwire-go"
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
 )
 
 // Query performs an API request unmarshalls the incoming JSON result

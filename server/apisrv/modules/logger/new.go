@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/pkg/errors"
-	"github.com/qbeon/webwire-messenger/server/apisrv/config"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/config"
 )
 
 // New creates a new API server logger

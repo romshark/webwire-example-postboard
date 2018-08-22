@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	wwr "github.com/qbeon/webwire-go"
-	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
+	engiface "github.com/qbeon/webwire-example-postboard/server/apisrv/modules/engine"
 )
 
 // helps parsing incomming parameters

@@ -2,7 +2,7 @@ package apisrv
 
 import (
 	wwr "github.com/qbeon/webwire-go"
-	"github.com/qbeon/webwire-messenger/server/apisrv/metrics"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/metrics"
 )
 
 // OnSessionCreated implements the wwr.SessionManager interface

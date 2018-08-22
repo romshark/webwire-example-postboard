@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/config"
-	"github.com/qbeon/webwire-messenger/server/client"
-	"github.com/qbeon/webwire-messenger/server/test/setup"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/config"
+	"github.com/qbeon/webwire-example-postboard/server/client"
+	"github.com/qbeon/webwire-example-postboard/server/test/setup"
 )
 
 var printStats = flag.Bool(

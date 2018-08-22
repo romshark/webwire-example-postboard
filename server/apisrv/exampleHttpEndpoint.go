@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/metrics"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/metrics"
 )
 
 // ExampleHTTPEndpoint represents an HTTP handler example

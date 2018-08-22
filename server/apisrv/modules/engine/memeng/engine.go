@@ -6,9 +6,9 @@ import (
 
 	"github.com/pkg/errors"
 	wwr "github.com/qbeon/webwire-go"
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
-	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
-	"github.com/qbeon/webwire-messenger/server/apisrv/modules/passhash"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
+	engiface "github.com/qbeon/webwire-example-postboard/server/apisrv/modules/engine"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/modules/passhash"
 )
 
 // engine represents an in-memory implementation of the API Engine interface

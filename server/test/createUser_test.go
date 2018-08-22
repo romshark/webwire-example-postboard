@@ -3,8 +3,8 @@ package test
 import (
 	"testing"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
-	"github.com/qbeon/webwire-messenger/server/test/setup"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/test/setup"
 )
 
 // TestCreateUser tests user account creation

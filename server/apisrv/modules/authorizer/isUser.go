@@ -1,8 +1,8 @@
 package authorizer
 
 import (
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
-	"github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/sessinfo"
 )
 
 // IsUser creates a new condition

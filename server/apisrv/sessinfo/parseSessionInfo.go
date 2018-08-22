@@ -3,7 +3,7 @@ package sessinfo
 import (
 	"github.com/pkg/errors"
 	wwr "github.com/qbeon/webwire-go"
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
 )
 
 // ParseSessionInfo parses the session info from a variant map

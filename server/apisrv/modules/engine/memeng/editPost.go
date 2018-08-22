@@ -3,7 +3,7 @@ package memeng
 import (
 	"time"
 
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
 )
 
 // editPost changes the contents of the post identified by `ident`

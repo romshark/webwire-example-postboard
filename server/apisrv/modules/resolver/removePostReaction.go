@@ -1,10 +1,10 @@
 package resolver
 
 import (
-	"github.com/qbeon/webwire-messenger/server/apisrv/api"
-	"github.com/qbeon/webwire-messenger/server/apisrv/modules/authorizer"
-	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
-	"github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/api"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/modules/authorizer"
+	engiface "github.com/qbeon/webwire-example-postboard/server/apisrv/modules/engine"
+	"github.com/qbeon/webwire-example-postboard/server/apisrv/sessinfo"
 )
 
 // RemovePostReaction implements the Resolver interface

@@ -1,6 +1,6 @@
 package authorizer
 
-import "github.com/qbeon/webwire-messenger/server/apisrv/sessinfo"
+import "github.com/qbeon/webwire-example-postboard/server/apisrv/sessinfo"
 
 // authorizer represents an implementation of the Authorizer module interface
 type authorizer struct{}
