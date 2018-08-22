@@ -11,13 +11,16 @@ import (
 	"github.com/qbeon/webwire-messenger/server/test/setup"
 )
 
-// TestRemovePostPerm tests removing a post without proper permissions
-func TestRemovePostPerm(t *testing.T) {
-	tryRemove := func(
+// TestRemovePostReactionPerm tests removing a post reaction
+// without proper permissions
+func TestRemovePostReactionPerm(t *testing.T) {
+	createAndTryRemove := func(
 		ts *setup.TestSetup,
 		postAuthor,
+		reactionAuthor,
 		remover client.ApiClient,
 	) {
+		// Create a post to create the reaction on
 		created := ts.Helper.CreatePost(
 			postAuthor,
 			api.CreatePostParams{
@@ -25,7 +28,16 @@ func TestRemovePostPerm(t *testing.T) {
 			},
 		)
 
-		// Try to remove the post without having proper permissions
+		// Create a reaction
+		createdReaction := ts.Helper.CreatePostReaction(
+			postAuthor,
+			reactionAuthor,
+			created.Ident,
+			api.Celebration,
+			"sample reaction",
+		)
+
+		// Try to remove the post reaction without having proper permissions
 		err := remover.RemovePost(
 			context.Background(),
 			api.RemovePostParams{
@@ -34,33 +46,18 @@ func TestRemovePostPerm(t *testing.T) {
 		)
 		ts.Helper.VerifyUnauthErr(err)
 
-		// Verify the post wasn't removed
-		post, err := postAuthor.GetPost(
+		// Verify the post reaction wasn't removed
+		postReaction, err := postAuthor.GetPostReaction(
 			context.Background(),
-			api.GetPostParams{
-				Ident: created.Ident,
+			api.GetPostReactionParams{
+				ReactionIdent: createdReaction.Ident,
 			},
 		)
 		require.NoError(t, err)
-		require.NotNil(t, post)
+		require.NotNil(t, postReaction)
 	}
 
-	t.Run("AsGuest_PostFromRoot", func(t *testing.T) {
-		t.Parallel()
-		ts := setup.New(t, setupConf)
-		defer ts.Teardown()
-
-		root := ts.NewAdminClient("root", "root")
-		guest := ts.NewGuestClient()
-
-		tryRemove(
-			ts,
-			root,  // Post author
-			guest, // Remover
-		)
-	})
-
-	t.Run("AsGuest_PostFromUser", func(t *testing.T) {
+	t.Run("AsGuest_FromUser", func(t *testing.T) {
 		t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
@@ -69,14 +66,15 @@ func TestRemovePostPerm(t *testing.T) {
 		_, _, user := ts.Helper.CreateUserRand(root, api.UtUser)
 		guest := ts.NewGuestClient()
 
-		tryRemove(
+		createAndTryRemove(
 			ts,
-			user,  // Post author
+			root,  // Post author
+			user,  // Reaction author
 			guest, // Remover
 		)
 	})
 
-	t.Run("AsUser_PostFromRoot", func(t *testing.T) {
+	t.Run("AsUser_FromOtherUser", func(t *testing.T) {
 		t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
@@ -85,9 +83,10 @@ func TestRemovePostPerm(t *testing.T) {
 		_, _, userAuthor := ts.Helper.CreateUserRand(root, api.UtUser)
 		_, _, userRemover := ts.Helper.CreateUserRand(root, api.UtUser)
 
-		tryRemove(
+		createAndTryRemove(
 			ts,
-			userAuthor,  // Post author
+			root,        // Post author
+			userAuthor,  // Reaction author
 			userRemover, // Remover
 		)
 	})

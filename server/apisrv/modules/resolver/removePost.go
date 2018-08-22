@@ -31,9 +31,7 @@ func (rsv *resolver) RemovePost(
 		return nil, err
 	}
 
-	// Check authorization, ensure the user is either the author of the post
-	// or an administrator, because administrators are also allowed to remove
-	// posts
+	// Check authorization (ownership)
 	if err := rsv.authorizer.MeetsEitherOf(
 		session,
 		authorizer.IsAdmin(

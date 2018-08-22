@@ -33,7 +33,7 @@ func TestRemoveOwnPost(t *testing.T) {
 		// Collect the identifiers of all created posts
 		identsToBeRemoved := make([]api.Identifier, len(created))
 		for i, post := range created {
-			identsToBeRemoved[i] = post.Identifier
+			identsToBeRemoved[i] = post.Ident
 		}
 
 		ts.Helper.RemovePosts(clt, identsToBeRemoved)

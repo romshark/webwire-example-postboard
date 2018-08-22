@@ -32,9 +32,16 @@ type Engine interface {
 	// GetUser retrieves the user profile by identifier
 	GetUser(ident api.Identifier) (*api.User, error)
 
-	// GetPosts retrieves the posts identified by `identifiers`
-	// returning them in the same order as `identifiers`
-	GetPosts(identifiers []api.Identifier) ([]*api.Post, error)
+	// GetPosts retrieves the posts identified by `idents`
+	// returning them in the same order as `idents`
+	GetPosts(idents []api.Identifier) ([]*api.Post, error)
+
+	// GetPostReactions retrieves the post reactions identified by `idents`
+	// returning them in the same order as `idents`
+	GetPostReactions(idents []api.Identifier) ([]*api.PostReaction, error)
+
+	// GetReactionsOfPost retrieves all reactions of a certain post
+	GetReactionsOfPost(postIdent api.Identifier) ([]*api.PostReaction, error)
 
 	// GetPostsAfter retrieves n posts (n = `limit`) after the post
 	// identified by `after`.
@@ -59,6 +66,10 @@ type Engine interface {
 	// RemovePost permanently removes the post identified by `ident`
 	// from the history
 	RemovePost(ident api.Identifier) error
+
+	// RemovePostReaction permanently removes the post reaction
+	// identified by `ident` from the history
+	RemovePostReaction(ident api.Identifier) error
 
 	// CreatePostReaction posts a reaction to the post identified by `ident`
 	CreatePostReaction(

@@ -35,6 +35,9 @@ type engine struct {
 
 	// postsByIdent stores the post.identifier index
 	postsByIdent map[api.Identifier]int
+
+	// postReactionsByIdent stores the postReaction.identifier index
+	postReactionsByIdent map[api.Identifier]*PostReaction
 }
 
 // New initializes a new in-memory engine implementation
@@ -61,10 +64,10 @@ func New(
 		posts: make([]*Post, 0, preallocPosts),
 
 		// Preallocate the post.identifier index
-		postsByIdent: make(
-			map[api.Identifier]int,
-			preallocPosts,
-		),
+		postsByIdent: make(map[api.Identifier]int, preallocPosts),
+
+		// Initialize the postReaction.identifier index
+		postReactionsByIdent: make(map[api.Identifier]*PostReaction),
 	}
 
 	// Encrypt the default password in order for it to work

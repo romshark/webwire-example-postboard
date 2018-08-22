@@ -23,8 +23,16 @@ func (eng *engine) createPostReaction(
 		return err
 	}
 
+	// Create a new post reaction
+	newPostReaction := &PostReaction{
+		Reaction: *reaction,
+	}
+
 	// Set the reaction
-	post.Post.Reactions = append(post.Post.Reactions, *reaction)
+	post.Reactions = append(post.Reactions, newPostReaction)
+
+	// Update reaction.identifier index
+	eng.postReactionsByIdent[reaction.Ident] = newPostReaction
 
 	return nil
 }

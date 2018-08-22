@@ -27,7 +27,7 @@ func (rsv *resolver) CreatePost(
 
 	// Instruct the engine to create a new post
 	if err := rsv.engine.CreatePost(&api.Post{
-		Identifier:  newIdent,
+		Ident:       newIdent,
 		Author:      session.UserIdentifier,
 		Publication: time.Now().UTC(),
 		Contents:    params.Contents,

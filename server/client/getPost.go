@@ -15,7 +15,7 @@ func (c *apiClient) GetPost(
 	if err := c.Query(ctx, api.GetPost, params, result); err != nil {
 		return nil, err
 	}
-	if result.Identifier.IsNull() {
+	if result.Ident.IsNull() {
 		return nil, nil
 	}
 	return result, nil

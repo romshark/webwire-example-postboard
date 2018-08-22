@@ -33,6 +33,18 @@ type GetPostsParams struct {
 	Limit uint32      `json:"limit"`
 }
 
+// GetPostReactionParams defines the parameters
+// required by api.GetPostReaction
+type GetPostReactionParams struct {
+	ReactionIdent Identifier `json:"reactionId"`
+}
+
+// GetReactionsOfPostParams defines the parameters
+// required by api.GetReactionsOfPost
+type GetReactionsOfPostParams struct {
+	PostIdent Identifier `json:"postId"`
+}
+
 // CreatePostParams defines the parameters required by api.CreatePost
 type CreatePostParams struct {
 	Contents string `json:"contents"`
@@ -55,4 +67,10 @@ type CreatePostReactionParams struct {
 	PostIdent   Identifier       `json:"postId"`
 	Type        PostReactionType `json:"type"`
 	Description string           `json:"description"`
+}
+
+// RemovePostReactionParams defines the parameters
+// required by api.RemovePostReaction
+type RemovePostReactionParams struct {
+	ReactionIdent Identifier `json:"reactionId"`
 }

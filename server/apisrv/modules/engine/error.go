@@ -32,6 +32,10 @@ const (
 	// ErrPostNotFound indicates that the targeted post doesn't exist
 	ErrPostNotFound
 
+	// ErrPostReactionNotFound indicates that the targeted post reaction
+	// doesn't exist
+	ErrPostReactionNotFound
+
 	// ErrPostAlreadyExists indicates that a post
 	// with a similar identifier already exists
 	ErrPostAlreadyExists
@@ -55,6 +59,8 @@ func (errc ErrorCode) String() string {
 		return "USERNAME_RESERVED"
 	case ErrPostNotFound:
 		return "POST_NOT_FOUND"
+	case ErrPostReactionNotFound:
+		return "POST_REACTION_NOT_FOUND"
 	case ErrPostAlreadyExists:
 		return "POST_EXISTS"
 	case ErrUserNotFound:

@@ -43,6 +43,13 @@ type Resolver interface {
 		params *api.GetPostsParams,
 	) (interface{}, error)
 
+	// GetReactionsOfPost find all reactions of a certain post
+	// identified by `params.PostIdent`
+	GetReactionsOfPost(
+		session *sessinfo.SessionInfo,
+		params *api.GetReactionsOfPostParams,
+	) (interface{}, error)
+
 	// CreatePost creates a new post.
 	// Requires
 	CreatePost(
@@ -68,5 +75,12 @@ type Resolver interface {
 	CreatePostReaction(
 		session *sessinfo.SessionInfo,
 		params *api.CreatePostReactionParams,
+	) (interface{}, error)
+
+	// RemovePostReaction permanently removes a post reaction.
+	// Requires either reaction author or administrator permissions
+	RemovePostReaction(
+		session *sessinfo.SessionInfo,
+		params *api.RemovePostReactionParams,
 	) (interface{}, error)
 }

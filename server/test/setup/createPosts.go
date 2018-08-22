@@ -45,8 +45,8 @@ func (h *Helper) CreatePosts(
 			createdPost := created[createdItr]
 
 			require.Equal(h.t,
-				createdPost.Identifier.String(),
-				retrievedPost.Identifier.String(),
+				createdPost.Ident.String(),
+				retrievedPost.Ident.String(),
 			)
 			require.Equal(h.t,
 				*author.Identifier(),
@@ -66,7 +66,6 @@ func (h *Helper) CreatePosts(
 				retrievedPost.Publication,
 				h.ts.MaxCreationTimeDeviation(),
 			)
-			require.Nil(h.t, retrievedPost.Reactions)
 		}
 	}
 

@@ -22,6 +22,12 @@ const (
 	// GetPosts represents an API method
 	GetPosts Method = "GetPosts"
 
+	// GetPostReaction represents an API method
+	GetPostReaction = "GetPostReaction"
+
+	// GetReactionsOfPost represents an API method
+	GetReactionsOfPost = "GetReactionsOfPost"
+
 	// CreatePost represents an API method
 	CreatePost Method = "CreatePost"
 
@@ -30,6 +36,9 @@ const (
 
 	// RemovePost represents an API method
 	RemovePost Method = "RemovePost"
+
+	// RemovePostReaction represents an API method
+	RemovePostReaction Method = "RemovePostReaction"
 
 	// CreatePostReaction represents an API method
 	CreatePostReaction Method = "CreatePostReaction"

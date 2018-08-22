@@ -17,7 +17,7 @@ func (eng *engine) createPost(newPost *api.Post) error {
 
 	// Return error if a post with a similar identifier is already defined,
 	// ignore the returned error because it'll definitely be a not-found error
-	post, _ := eng.findPostByIdent(newPost.Identifier)
+	post, _ := eng.findPostByIdent(newPost.Ident)
 	if post != nil {
 		return engiface.NewError(engiface.ErrPostAlreadyExists)
 	}
@@ -29,7 +29,7 @@ func (eng *engine) createPost(newPost *api.Post) error {
 	})
 
 	// Update post identifier index
-	eng.postsByIdent[newPost.Identifier] = len(eng.posts) - 1
+	eng.postsByIdent[newPost.Ident] = len(eng.posts) - 1
 
 	return nil
 }

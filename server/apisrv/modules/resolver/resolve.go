@@ -51,6 +51,22 @@ func (rsv *resolver) Resolve(
 		}
 		result, err = rsv.GetPosts(sessionInfo, params)
 
+	case api.GetPostReaction:
+		// Handle post reaction request
+		params := &api.GetPostReactionParams{}
+		if err := parseParameters(message, params); err != nil {
+			return nil, err
+		}
+		result, err = rsv.GetPostReaction(sessionInfo, params)
+
+	case api.GetReactionsOfPost:
+		// Handle request for reactions of a post
+		params := &api.GetReactionsOfPostParams{}
+		if err := parseParameters(message, params); err != nil {
+			return nil, err
+		}
+		result, err = rsv.GetReactionsOfPost(sessionInfo, params)
+
 	case api.CreatePost:
 		// Handle post creation request
 		params := &api.CreatePostParams{}
@@ -74,6 +90,14 @@ func (rsv *resolver) Resolve(
 			return nil, err
 		}
 		result, err = rsv.RemovePost(sessionInfo, params)
+
+	case api.RemovePostReaction:
+		// Handle post reaction removal request
+		params := &api.RemovePostReactionParams{}
+		if err := parseParameters(message, params); err != nil {
+			return nil, err
+		}
+		result, err = rsv.RemovePostReaction(sessionInfo, params)
 
 	case api.CreatePostReaction:
 		// Handle post reaction creation request

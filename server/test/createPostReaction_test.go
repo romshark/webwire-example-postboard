@@ -27,7 +27,7 @@ func TestCreatePostReaction(t *testing.T) {
 		ts.Helper.CreatePostReaction(
 			user1,
 			root,
-			post.Identifier,
+			post.Ident,
 			api.Shock,
 			"wooow!",
 		)
@@ -50,7 +50,7 @@ func TestCreatePostReaction(t *testing.T) {
 		ts.Helper.CreatePostReaction(
 			root,
 			user1,
-			post.Identifier,
+			post.Ident,
 			api.Shock,
 			"Huraah!",
 		)

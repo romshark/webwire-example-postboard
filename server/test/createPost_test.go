@@ -50,8 +50,8 @@ func TestCreatePost(t *testing.T) {
 				createdPost := created[createdItr]
 
 				require.Equal(t,
-					createdPost.Identifier.String(),
-					retrievedPost.Identifier.String(),
+					createdPost.Ident.String(),
+					retrievedPost.Ident.String(),
 				)
 				require.Equal(t,
 					*author.Identifier(),
@@ -71,7 +71,6 @@ func TestCreatePost(t *testing.T) {
 					retrievedPost.Publication,
 					ts.MaxCreationTimeDeviation(),
 				)
-				require.Nil(t, retrievedPost.Reactions)
 			}
 		}
 	}

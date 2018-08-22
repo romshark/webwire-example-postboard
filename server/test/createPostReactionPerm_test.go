@@ -20,7 +20,7 @@ func TestCreatePostReactionPerm(t *testing.T) {
 		reactionAuthor client.ApiClient,
 	) {
 		// Post post
-		postBefore := ts.Helper.CreatePost(postAuthor, api.CreatePostParams{
+		post := ts.Helper.CreatePost(postAuthor, api.CreatePostParams{
 			Contents: "now look at thaaat!",
 		})
 
@@ -28,7 +28,7 @@ func TestCreatePostReactionPerm(t *testing.T) {
 		ident, err := reactionAuthor.CreatePostReaction(
 			context.Background(),
 			api.CreatePostReactionParams{
-				PostIdent:   postBefore.Identifier,
+				PostIdent:   post.Ident,
 				Type:        api.Shock,
 				Description: "this will not be created due to lack of perm.",
 			},
@@ -37,14 +37,14 @@ func TestCreatePostReactionPerm(t *testing.T) {
 		require.True(t, ident.IsNull())
 
 		// Ensure the reaction wasn't actually created
-		postAfter, err := postAuthor.GetPost(
+		reactionsAfter, err := postAuthor.GetReactionsOfPost(
 			context.Background(),
-			api.GetPostParams{
-				Ident: postBefore.Identifier,
+			api.GetReactionsOfPostParams{
+				PostIdent: post.Ident,
 			},
 		)
 		require.NoError(t, err)
-		require.Len(t, postAfter.Reactions, 0)
+		require.Len(t, reactionsAfter, 0)
 	}
 
 	t.Run("AsGuest_ToRootPost", func(t *testing.T) {

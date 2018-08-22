@@ -28,9 +28,16 @@ func (h *Helper) CreatePostReaction(
 	)
 	require.NoError(h.t, err)
 	require.NotNil(h.t, postBefore)
-	reactionsBefore := postBefore.Reactions
+
+	// Get all reactions
+	reactionsBefore, err := postAuthor.GetReactionsOfPost(
+		context.Background(),
+		api.GetReactionsOfPostParams{
+			PostIdent: postBefore.Ident,
+		},
+	)
 	if reactionsBefore == nil {
-		reactionsBefore = make([]api.PostReaction, 0)
+		reactionsBefore = make([]*api.PostReaction, 0)
 	}
 
 	// Post a new reaction
@@ -45,16 +52,16 @@ func (h *Helper) CreatePostReaction(
 	require.NoError(h.t, err)
 	require.False(h.t, reactionIdent.IsNull())
 
-	// Get previous reactions
-	postAfter, err := postAuthor.GetPost(
+	// Refetch the updated reactions
+	reactionsAfter, err := postAuthor.GetReactionsOfPost(
 		context.Background(),
-		api.GetPostParams{
-			Ident: postIdent,
+		api.GetReactionsOfPostParams{
+			PostIdent: postBefore.Ident,
 		},
 	)
-	require.NoError(h.t, err)
-	require.NotNil(h.t, postAfter)
-	reactionsAfter := postAfter.Reactions
+	if reactionsAfter == nil {
+		reactionsAfter = make([]*api.PostReaction, 0)
+	}
 
 	// Verify the new reaction was actually created
 	require.Len(h.t, reactionsAfter, len(reactionsBefore)+1)
@@ -80,5 +87,5 @@ func (h *Helper) CreatePostReaction(
 		h.ts.MaxCreationTimeDeviation(),
 	)
 
-	return &reactionsAfter[len(reactionsAfter)-1]
+	return reactionsAfter[len(reactionsAfter)-1]
 }

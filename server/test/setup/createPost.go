@@ -16,12 +16,12 @@ func (h *Helper) CreatePost(
 	author client.ApiClient,
 	params api.CreatePostParams,
 ) *api.Post {
-	// Post post
+	// Create the post
 	msgIdent, err := author.CreatePost(context.Background(), params)
 	require.NoError(h.t, err)
 	require.False(h.t, msgIdent.IsNull())
 
-	// Retrieve post
+	// Retrieve the post
 	post, err := author.GetPost(context.Background(), api.GetPostParams{
 		Ident: msgIdent,
 	})
@@ -29,7 +29,7 @@ func (h *Helper) CreatePost(
 	require.NotNil(h.t, post)
 
 	// Verify post fields
-	require.Equal(h.t, msgIdent.String(), post.Identifier.String())
+	require.Equal(h.t, msgIdent.String(), post.Ident.String())
 	require.Equal(h.t, params.Contents, post.Contents)
 	require.WithinDuration(h.t,
 		time.Now().UTC(),
@@ -40,11 +40,6 @@ func (h *Helper) CreatePost(
 	require.Nil(h.t,
 		post.LastEdit,
 		"recently created post cannot have been edited",
-	)
-	require.Len(h.t,
-		post.Reactions,
-		0,
-		"recently created post cannot have any reactions",
 	)
 
 	return post

@@ -34,6 +34,18 @@ type Api interface {
 		params GetPostParams,
 	) (*Post, error)
 
+	// GetPostReaction finds a specific post reaction by `params.ReactionIdent`
+	GetPostReaction(
+		ctx context.Context,
+		params GetPostReactionParams,
+	) (*PostReaction, error)
+
+	// GetReactionsOfPost returns the reactions to a specific post
+	GetReactionsOfPost(
+		ctx context.Context,
+		params GetReactionsOfPostParams,
+	) ([]*PostReaction, error)
+
 	// GetPosts looks for n posts (n = 'limit') after
 	// the post identified by the given identifier.
 	// After is set to the latest post if not explicitly specified
@@ -56,7 +68,7 @@ type Api interface {
 		params EditPostParams,
 	) error
 
-	// RemovePost permanently removes a post.
+	// RemovePost removes a post.
 	// Requires either post author or administrator permissions
 	RemovePost(
 		ctx context.Context,
@@ -68,4 +80,11 @@ type Api interface {
 		ctx context.Context,
 		params CreatePostReactionParams,
 	) (Identifier, error)
+
+	// RemovePostReaction removes a post reaction.
+	// Requires either reaction author or administrator permissions
+	RemovePostReaction(
+		ctx context.Context,
+		params RemovePostReactionParams,
+	) error
 }
