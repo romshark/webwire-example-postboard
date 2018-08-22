@@ -11,7 +11,7 @@ import (
 func TestCreatePostReaction(t *testing.T) {
 
 	t.Run("AsRoot_ToUsersPost", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
@@ -34,7 +34,7 @@ func TestCreatePostReaction(t *testing.T) {
 	})
 
 	t.Run("AsUser_ToRootPost", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 

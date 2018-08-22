@@ -51,7 +51,7 @@ func TestCreateUserPerm(t *testing.T) {
 	}
 
 	t.Run("AsUser", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
@@ -62,7 +62,7 @@ func TestCreateUserPerm(t *testing.T) {
 	})
 
 	t.Run("AsGuest", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
@@ -72,7 +72,7 @@ func TestCreateUserPerm(t *testing.T) {
 	})
 
 	t.Run("AsAdmin", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 

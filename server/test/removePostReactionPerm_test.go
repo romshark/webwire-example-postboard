@@ -58,7 +58,7 @@ func TestRemovePostReactionPerm(t *testing.T) {
 	}
 
 	t.Run("AsGuest_FromUser", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
@@ -75,7 +75,7 @@ func TestRemovePostReactionPerm(t *testing.T) {
 	})
 
 	t.Run("AsUser_FromOtherUser", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 

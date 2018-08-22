@@ -50,7 +50,7 @@ func TestRemoveOwnPost(t *testing.T) {
 	}
 
 	t.Run("AsRoot", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
@@ -70,7 +70,7 @@ func TestRemoveOwnPost(t *testing.T) {
 	})
 
 	t.Run("AsUser", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 

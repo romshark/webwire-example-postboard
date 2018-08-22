@@ -76,7 +76,7 @@ func TestCreatePost(t *testing.T) {
 	}
 
 	t.Run("AsRoot", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
@@ -97,7 +97,7 @@ func TestCreatePost(t *testing.T) {
 	})
 
 	t.Run("AsUser", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
@@ -120,7 +120,7 @@ func TestCreatePost(t *testing.T) {
 	})
 
 	t.Run("AsRoot_Multiple", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
@@ -149,7 +149,7 @@ func TestCreatePost(t *testing.T) {
 	})
 
 	t.Run("AsUser_Multiple", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 

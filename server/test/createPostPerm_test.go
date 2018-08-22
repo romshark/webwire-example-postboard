@@ -41,7 +41,7 @@ func TestCreatePostPerm(t *testing.T) {
 	}
 
 	t.Run("AsGuest", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 

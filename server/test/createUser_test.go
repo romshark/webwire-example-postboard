@@ -10,7 +10,7 @@ import (
 // TestCreateUser tests user account creation
 // by a root administrator client
 func TestCreateUser(t *testing.T) {
-	t.Parallel()
+	//t.Parallel()
 	ts := setup.New(t, setupConf)
 	defer ts.Teardown()
 

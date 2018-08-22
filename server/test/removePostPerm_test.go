@@ -46,7 +46,7 @@ func TestRemovePostPerm(t *testing.T) {
 	}
 
 	t.Run("AsGuest_PostFromRoot", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
@@ -61,7 +61,7 @@ func TestRemovePostPerm(t *testing.T) {
 	})
 
 	t.Run("AsGuest_PostFromUser", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
@@ -77,7 +77,7 @@ func TestRemovePostPerm(t *testing.T) {
 	})
 
 	t.Run("AsUser_PostFromRoot", func(t *testing.T) {
-		t.Parallel()
+		//t.Parallel()
 		ts := setup.New(t, setupConf)
 		defer ts.Teardown()
 
