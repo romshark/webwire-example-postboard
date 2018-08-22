@@ -7,7 +7,7 @@ import (
 )
 
 // createUser creates a new user account.
-// Returns an error if the username is already reserved by another user
+// Returns a `ErrUsernameReserved` error if the username is already reserved
 func (eng *engine) createUser(newAccount *UserAccount) error {
 	// Ensure users with a similar username don't exist
 	_, err := eng.findUserByUsername(newAccount.Profile.Username)

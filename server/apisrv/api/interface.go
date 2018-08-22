@@ -28,44 +28,44 @@ type Api interface {
 		params GetUserParams,
 	) (*User, error)
 
-	// GetMessage finds a specific message by the given identifier
-	GetMessage(
+	// GetPost finds a specific post by the given identifier
+	GetPost(
 		ctx context.Context,
-		params GetMessageParams,
-	) (*Message, error)
+		params GetPostParams,
+	) (*Post, error)
 
-	// GetMessages looks for n messages (n = 'limit') after
-	// the message identified by the given identifier.
-	// After is set to the latest message if not explicitly specified
-	GetMessages(
+	// GetPosts looks for n posts (n = 'limit') after
+	// the post identified by the given identifier.
+	// After is set to the latest post if not explicitly specified
+	GetPosts(
 		ctx context.Context,
-		params GetMessagesParams,
-	) ([]*Message, error)
+		params GetPostsParams,
+	) ([]*Post, error)
 
-	// PostMessage posts a new message.
+	// CreatePost creates a new post.
 	// Requires
-	PostMessage(
+	CreatePost(
 		ctx context.Context,
-		params PostMessageParams,
+		params CreatePostParams,
 	) (Identifier, error)
 
-	// EditMessage permanently changes the contents of a message.
-	// Requires message owner permissions
-	EditMessage(
+	// EditPost permanently changes the contents of a post.
+	// Requires post author permissions
+	EditPost(
 		ctx context.Context,
-		params EditMessageParams,
+		params EditPostParams,
 	) error
 
-	// RemoveMessage permanently removes a messages.
-	// Requires either message owner or administrator permissions
-	RemoveMessage(
+	// RemovePost permanently removes a post.
+	// Requires either post author or administrator permissions
+	RemovePost(
 		ctx context.Context,
-		params RemoveMessageParams,
+		params RemovePostParams,
 	) error
 
-	// PostMessageReaction adds a reaction to the message
-	PostMessageReaction(
+	// CreatePostReaction creates a new reaction on the post
+	CreatePostReaction(
 		ctx context.Context,
-		params PostMessageReactionParams,
+		params CreatePostReactionParams,
 	) (Identifier, error)
 }

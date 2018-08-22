@@ -15,7 +15,8 @@ type User struct {
 	// Registration defines when this account was created
 	Registration time.Time `json:"registration"`
 
-	// Reputation defines the amount of upvotes on messages posted by this user
+	// Reputation defines the amount of upvotes
+	// on posts and reactions by this user
 	Reputation float64 `json:"reputation"`
 
 	// Type defines whether this user is an admin, a regular user or a guest

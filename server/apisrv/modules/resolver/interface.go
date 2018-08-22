@@ -35,38 +35,38 @@ type Resolver interface {
 		params *api.CreateUserParams,
 	) (interface{}, error)
 
-	// GetMessages looks for n messages (n = limit) after
-	// the message identified by the given identifier.
-	// After is set to the latest message if not explicitly specified
-	GetMessages(
+	// GetPosts looks for n posts (n = limit) after
+	// the post identified by `params.Ident`.
+	// After is set to the latest post if not explicitly specified
+	GetPosts(
 		session *sessinfo.SessionInfo,
-		params *api.GetMessagesParams,
+		params *api.GetPostsParams,
 	) (interface{}, error)
 
-	// PostMessage posts a new message.
+	// CreatePost creates a new post.
 	// Requires
-	PostMessage(
+	CreatePost(
 		session *sessinfo.SessionInfo,
-		params *api.PostMessageParams,
+		params *api.CreatePostParams,
 	) (interface{}, error)
 
-	// EditMessage permanently changes the contents of a message.
-	// Requires message owner permissions
-	EditMessage(
+	// EditPost permanently changes the contents of a post.
+	// Requires post author permissions
+	EditPost(
 		session *sessinfo.SessionInfo,
-		params *api.EditMessageParams,
+		params *api.EditPostParams,
 	) (interface{}, error)
 
-	// RemoveMessage permanently removes a messages.
-	// Requires either message owner or administrator permissions
-	RemoveMessage(
+	// RemovePost permanently removes a post.
+	// Requires either post author or administrator permissions
+	RemovePost(
 		session *sessinfo.SessionInfo,
-		params *api.RemoveMessageParams,
+		params *api.RemovePostParams,
 	) (interface{}, error)
 
-	// PostMessageReaction adds a reaction to the message
-	PostMessageReaction(
+	// CreatePostReaction adds a reaction to the post
+	CreatePostReaction(
 		session *sessinfo.SessionInfo,
-		params *api.PostMessageReactionParams,
+		params *api.CreatePostReactionParams,
 	) (interface{}, error)
 }

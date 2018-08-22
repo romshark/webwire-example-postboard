@@ -10,11 +10,11 @@ import (
 type validator struct {
 	UsernameRule                 *regexp.Regexp
 	NameRule                     *regexp.Regexp
-	MinMessageLength             uint32
-	MaxMessageLength             uint32
+	MinPostLength                uint32
+	MaxPostLength                uint32
 	MinReactionDescriptionLength uint32
 	MaxReactionDescriptionLength uint32
-	MaxMessagesQueryLimit        uint32
+	MaxPostsQueryLimit           uint32
 	MinPasswordLength            uint32
 	MaxPasswordLength            uint32
 }
@@ -23,11 +23,11 @@ type validator struct {
 func NewValidator(
 	usernameRule *regexp.Regexp,
 	nameRule *regexp.Regexp,
-	minMessageLength,
-	maxMessageLength,
+	minPostLength,
+	maxPostLength,
 	minReactionDescriptionLength,
 	maxReactionDescriptionLength,
-	maxMessagesQueryLimit,
+	maxPostsQueryLimit,
 	minPasswordLength,
 	maxPasswordLength uint32,
 ) Validator {
@@ -38,11 +38,11 @@ func NewValidator(
 	return &validator{
 		UsernameRule:                 usernameRule,
 		NameRule:                     nameRule,
-		MinMessageLength:             minMessageLength,
-		MaxMessageLength:             maxMessageLength,
+		MinPostLength:                minPostLength,
+		MaxPostLength:                maxPostLength,
 		MinReactionDescriptionLength: minReactionDescriptionLength,
 		MaxReactionDescriptionLength: maxReactionDescriptionLength,
-		MaxMessagesQueryLimit:        maxMessagesQueryLimit,
+		MaxPostsQueryLimit:           maxPostsQueryLimit,
 		MinPasswordLength:            minPasswordLength,
 		MaxPasswordLength:            maxPasswordLength,
 	}

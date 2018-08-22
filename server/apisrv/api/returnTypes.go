@@ -5,13 +5,13 @@ type CreateUserReturn struct {
 	UserIdent Identifier `json:"id"`
 }
 
-// PostMessageReturn represents the return type of the PostMessage method
-type PostMessageReturn struct {
-	MessageIdent Identifier `json:"id"`
+// CreatePostReturn represents the return type of api.CreatePost
+type CreatePostReturn struct {
+	PostIdent Identifier `json:"id"`
 }
 
-// PostMessageReactionReturn represents the return type
-// of the PostMessageReaction method
-type PostMessageReactionReturn struct {
-	MessageReactionIdent Identifier `json:"id"`
+// CreatePostReactionReturn represents the return type
+// of api.CreatePostReaction
+type CreatePostReactionReturn struct {
+	PostReactionIdent Identifier `json:"id"`
 }

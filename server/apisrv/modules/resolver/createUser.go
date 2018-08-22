@@ -60,7 +60,7 @@ func (rsv *resolver) CreateUser(
 		return nil, err
 	}
 
-	// Message successfully posted
+	// User successfully created
 	return api.CreateUserReturn{
 		UserIdent: newIdent,
 	}, nil

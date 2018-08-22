@@ -29,12 +29,12 @@ const (
 	// by another user's account
 	ErrUsernameReserved
 
-	// ErrMessageNotFound indicates that the targeted message doesn't exist
-	ErrMessageNotFound
+	// ErrPostNotFound indicates that the targeted post doesn't exist
+	ErrPostNotFound
 
-	// ErrMessageAlreadyExists indicates that a message
+	// ErrPostAlreadyExists indicates that a post
 	// with a similar identifier already exists
-	ErrMessageAlreadyExists
+	ErrPostAlreadyExists
 
 	// ErrUserNotFound indicates that the targeted user account doesn't exist
 	ErrUserNotFound
@@ -53,10 +53,10 @@ func (errc ErrorCode) String() string {
 		return "WRONG_CREDENTIALS"
 	case ErrUsernameReserved:
 		return "USERNAME_RESERVED"
-	case ErrMessageNotFound:
-		return "MSG_NOT_FOUND"
-	case ErrMessageAlreadyExists:
-		return "MSG_EXISTS"
+	case ErrPostNotFound:
+		return "POST_NOT_FOUND"
+	case ErrPostAlreadyExists:
+		return "POST_EXISTS"
 	case ErrUserNotFound:
 		return "USER_NOT_FOUND"
 	}

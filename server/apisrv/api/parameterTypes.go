@@ -17,47 +17,42 @@ type CreateUserParams struct {
 	Type      UserType `json:"type"`
 }
 
-// GetUserParams defines the parameters required by the user getter method
+// GetUserParams defines the parameters required by api.GetUser
 type GetUserParams struct {
 	Ident Identifier `json:"id"`
 }
 
-// GetMessageParams defines the parameters
-// required by the messages getter method
-type GetMessageParams struct {
+// GetPostParams defines the parameters required by api.GetPost
+type GetPostParams struct {
 	Ident Identifier `json:"id"`
 }
 
-// GetMessagesParams defines the parameters
-// required by the messages getter method
-type GetMessagesParams struct {
+// GetPostsParams defines the parameters required by api.GetPosts
+type GetPostsParams struct {
 	After *Identifier `json:"after"`
 	Limit uint32      `json:"limit"`
 }
 
-// PostMessageParams defines the parameters
-// required by the message creation mutation
-type PostMessageParams struct {
+// CreatePostParams defines the parameters required by api.CreatePost
+type CreatePostParams struct {
 	Contents string `json:"contents"`
 }
 
-// EditMessageParams defines the parameters
-// required by the message editing mutation
-type EditMessageParams struct {
-	MessageIdent Identifier `json:"messageId"`
-	NewContents  string     `json:"newContents"`
+// EditPostParams defines the parameters required by api.EditPost
+type EditPostParams struct {
+	PostIdent   Identifier `json:"postId"`
+	NewContents string     `json:"newContents"`
 }
 
-// RemoveMessageParams defines the parameters
-// required by the message deletion mutation
-type RemoveMessageParams struct {
-	MessageIdent Identifier `json:"messageId"`
+// RemovePostParams defines the parameters required by api.RemovePost
+type RemovePostParams struct {
+	PostIdent Identifier `json:"postId"`
 }
 
-// PostMessageReactionParams defines the parameters
-// required by the message reaction creation mutation
-type PostMessageReactionParams struct {
-	MessageIdent Identifier          `json:"messageId"`
-	Type         MessageReactionType `json:"type"`
-	Description  string              `json:"description"`
+// CreatePostReactionParams defines the parameters
+// required by api.CreatePostReaction
+type CreatePostReactionParams struct {
+	PostIdent   Identifier       `json:"postId"`
+	Type        PostReactionType `json:"type"`
+	Description string           `json:"description"`
 }

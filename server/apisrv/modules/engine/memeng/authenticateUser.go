@@ -5,8 +5,8 @@ import (
 	engiface "github.com/qbeon/webwire-messenger/server/apisrv/modules/engine"
 )
 
-// findUserByUsername returns the user account identified by the given
-// username. Returns a user-not-found error if no user was identified
+// findUserByUsername returns the user account identified by `username`.
+// Returns a `ErrUserNotFound` error if no user could be found
 func (eng *engine) findUserByUsername(
 	username string,
 ) (*UserAccount, error) {

@@ -14,15 +14,15 @@ type Validator interface {
 	// otherwise returns nil
 	Password(password string) error
 
-	// MessageContents returns an error if the given message contents
+	// PostContents returns an error `contents`
 	// are invalid, otherwise returns nil
-	MessageContents(contents string) error
+	PostContents(contents string) error
 
-	// ReactionDescription returns an error if the reaction description
+	// ReactionDescription returns an error if `description`
 	// is invalid, otherwise returns nil
 	ReactionDescription(description string) error
 
-	// MessagesQueryLimit returns an error if the given messages query limit
+	// PostsQueryLimit returns an error if the given posts query limit
 	// is invalid, otherwise returns nil
-	MessagesQueryLimit(limit uint32) error
+	PostsQueryLimit(limit uint32) error
 }

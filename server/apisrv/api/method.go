@@ -16,21 +16,21 @@ const (
 	// GetUser represents an API method
 	GetUser Method = "GetUser"
 
-	// GetMessage represents an API method
-	GetMessage Method = "GetMessage"
+	// GetPost represents an API method
+	GetPost Method = "GetPost"
 
-	// GetMessages represents an API method
-	GetMessages Method = "GetMessages"
+	// GetPosts represents an API method
+	GetPosts Method = "GetPosts"
 
-	// PostMessage represents an API method
-	PostMessage Method = "PostMessage"
+	// CreatePost represents an API method
+	CreatePost Method = "CreatePost"
 
-	// EditMessage represents an API method
-	EditMessage Method = "EditMessage"
+	// EditPost represents an API method
+	EditPost Method = "EditPost"
 
-	// RemoveMessage represents an API method
-	RemoveMessage Method = "RemoveMessage"
+	// RemovePost represents an API method
+	RemovePost Method = "RemovePost"
 
-	// PostMessageReaction represents an API method
-	PostMessageReaction Method = "PostMessageReaction"
+	// CreatePostReaction represents an API method
+	CreatePostReaction Method = "CreatePostReaction"
 )

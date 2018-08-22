@@ -30,11 +30,11 @@ type engine struct {
 	// sessions stores all currently open sessions indexed by key
 	sessions map[string]*wwr.Session
 
-	// messages stores references to all messages in chronological order
-	messages []*Message
+	// posts stores references to all posts in chronological order
+	posts []*Post
 
-	// messagesByIdent stores the message.identifier index
-	messagesByIdent map[api.Identifier]int
+	// postsByIdent stores the post.identifier index
+	postsByIdent map[api.Identifier]int
 }
 
 // New initializes a new in-memory engine implementation
@@ -42,7 +42,7 @@ func New(
 	passwordHasher passhash.PasswordHasher,
 	defaultRootPassword string,
 	preallocSessions int,
-	preallocMessages int,
+	preallocPosts int,
 ) (engiface.Engine, error) {
 	inMemoryEngine := &engine{
 		lock:           &sync.Mutex{},
@@ -57,13 +57,13 @@ func New(
 		// Preallocate the sessions store
 		sessions: make(map[string]*wwr.Session, preallocSessions),
 
-		// Preallocate the message store
-		messages: make([]*Message, 0, preallocMessages),
+		// Preallocate the posts store
+		posts: make([]*Post, 0, preallocPosts),
 
-		// Preallocate the message.identifier index
-		messagesByIdent: make(
+		// Preallocate the post.identifier index
+		postsByIdent: make(
 			map[api.Identifier]int,
-			preallocMessages,
+			preallocPosts,
 		),
 	}
 
@@ -72,10 +72,7 @@ func New(
 		defaultRootPassword,
 	)
 	if err != nil {
-		return nil, errors.Wrap(
-			err,
-			"couldn't hash the default root password",
-		)
+		return nil, errors.Wrap(err, "couldn't hash the default root password")
 	}
 
 	// Create root administrator user

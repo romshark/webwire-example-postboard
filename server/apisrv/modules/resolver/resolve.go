@@ -35,53 +35,53 @@ func (rsv *resolver) Resolve(
 		// Handle logout request
 		result, err = rsv.Logout(sessionInfo, connection)
 
-	case api.GetMessage:
-		// Handle message request
-		params := &api.GetMessageParams{}
+	case api.GetPost:
+		// Handle post request
+		params := &api.GetPostParams{}
 		if err := parseParameters(message, params); err != nil {
 			return nil, err
 		}
-		result, err = rsv.GetMessage(sessionInfo, params)
+		result, err = rsv.GetPost(sessionInfo, params)
 
-	case api.GetMessages:
-		// Handle messages request
-		params := &api.GetMessagesParams{}
+	case api.GetPosts:
+		// Handle posts request
+		params := &api.GetPostsParams{}
 		if err := parseParameters(message, params); err != nil {
 			return nil, err
 		}
-		result, err = rsv.GetMessages(sessionInfo, params)
+		result, err = rsv.GetPosts(sessionInfo, params)
 
-	case api.PostMessage:
-		// Handle message creation request
-		params := &api.PostMessageParams{}
+	case api.CreatePost:
+		// Handle post creation request
+		params := &api.CreatePostParams{}
 		if err := parseParameters(message, params); err != nil {
 			return nil, err
 		}
-		result, err = rsv.PostMessage(sessionInfo, params)
+		result, err = rsv.CreatePost(sessionInfo, params)
 
-	case api.EditMessage:
-		// Handle message edit request
-		params := &api.EditMessageParams{}
+	case api.EditPost:
+		// Handle post edit request
+		params := &api.EditPostParams{}
 		if err := parseParameters(message, params); err != nil {
 			return nil, err
 		}
-		result, err = rsv.EditMessage(sessionInfo, params)
+		result, err = rsv.EditPost(sessionInfo, params)
 
-	case api.RemoveMessage:
-		// Handle message deletion request
-		params := &api.RemoveMessageParams{}
+	case api.RemovePost:
+		// Handle post deletion request
+		params := &api.RemovePostParams{}
 		if err := parseParameters(message, params); err != nil {
 			return nil, err
 		}
-		result, err = rsv.RemoveMessage(sessionInfo, params)
+		result, err = rsv.RemovePost(sessionInfo, params)
 
-	case api.PostMessageReaction:
-		// Handle message reaction creation request
-		params := &api.PostMessageReactionParams{}
+	case api.CreatePostReaction:
+		// Handle post reaction creation request
+		params := &api.CreatePostReactionParams{}
 		if err := parseParameters(message, params); err != nil {
 			return nil, err
 		}
-		result, err = rsv.PostMessageReaction(sessionInfo, params)
+		result, err = rsv.CreatePostReaction(sessionInfo, params)
 
 	case api.CreateUser:
 		// Handle user creation request

@@ -10,7 +10,7 @@ func (eng *engine) GetUser(ident api.Identifier) (*api.User, error) {
 	eng.lock.Lock()
 	defer eng.lock.Unlock()
 
-	// Search by the message.identifier index for each requested identifier
+	// Search by user.identifier index for each requested identifier
 	if account, exists := eng.users[ident]; exists {
 		return &account.Profile, nil
 	}

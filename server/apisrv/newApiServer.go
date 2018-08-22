@@ -33,11 +33,11 @@ func NewApiServer(conf config.Config) (ApiServer, error) {
 		regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_-]{1,31}$"), // username rule
 		// TODO: add UTF8 support
 		regexp.MustCompile("^[a-zA-Z]{1,64}$"), // name rule
-		1,   // minimum message length
-		255, // maximum message length
+		1,   // minimum post length
+		255, // maximum post length
 		1,   // minimum reaction description length
 		256, // maximum reaction description length
-		10,  // maximum messages query limit
+		10,  // maximum posts query limit
 		6,   // minimum password length
 		256, // maximum password length
 	)
@@ -50,7 +50,7 @@ func NewApiServer(conf config.Config) (ApiServer, error) {
 		passwordHasher,
 		"root", // default root administrator password
 		1024,   // preallocated sessions
-		1024,   // preallocated messages
+		1024,   // preallocated posts
 	)
 	if err != nil {
 		return nil, errors.Wrap(err, "engine initialization failed")
