@@ -24,8 +24,8 @@ before_script:
 
 script:
   # Run all the tests with the race detector enabled
-  - overalls -project=github.com/qbeon/webwire-example-postboard/server -covermode=atomic -debug -- -race -v
-  - $HOME/gopath/bin/goveralls -coverprofile=./server/overalls.coverprofile -service=travis-ci -repotoken $COVERALLS_TOKEN
+  - overalls -project=github.com/qbeon/webwire-example-postboard/server -covermode=atomic -debug -- -race -v -coverpkg=github.com/qbeon/webwire-example-postboard/server/client
+  - $HOME/gopath/bin/goveralls -coverprofile=./server/overalls.coverprofile -service=travis-ci -repotoken=$COVERALLS_TOKEN
 
   # go vet is the official Go static analyzer
   - go vet ./...
